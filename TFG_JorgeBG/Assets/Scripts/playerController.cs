@@ -4,54 +4,96 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class playerController : MonoBehaviour
-{/*
+{
     Animator animator;
+    PlayerInputActions playerInputActions;
+    CharacterController characterController;
+
+    public float speed = 2f;
+    public float turnSpeed = 10f;
+    public float jumpForce;
 
     int isWalkingHas;
     int isRunningHas;
 
-    PlayerInput input;
-
-    Vector2 currentMovement;
     bool movementPressed;
     bool runPressed;
 
-    Vector3 newPosition;
+    public float smoothInputSpeed = .02f;
+
+    Vector2 movementInput;
+    Vector3 movementConverted;
 
     void Awake()
     {
-        input = new PlayerInput();
-        input.characterControls.Movement.performed += ctx => {
-            currentMovement = ctx.ReadValue<Vector2>();
-            movementPressed = currentMovement.x != 0 || currentMovement.y != 0;
-        };
-        input.characterControls.Run.performed += ctx => runPressed = ctx.ReadValueAsButton();
+        animator = GetComponent<Animator>();
+        playerInputActions = new PlayerInputActions();
+        characterController = GetComponent<CharacterController>();
+
+        playerInputActions.characterControls.Movement.started += OnMove;
+        playerInputActions.characterControls.Movement.performed += OnMove;
+        playerInputActions.characterControls.Movement.canceled += OnMove;
+
+        playerInputActions.characterControls.Run.performed += Run;
+        playerInputActions.characterControls.Run.canceled += stopRun;
+
+        playerInputActions.characterControls.jump.performed += initJump;
     }
+    private void OnMove(InputAction.CallbackContext ctx)
+    {
+        movementInput = ctx.ReadValue<Vector2>();
+        movementConverted.x = movementInput.x;
+        movementConverted.z = movementInput.y;
+        movementPressed = movementInput.x != 0 || movementInput.y != 0;
+    }
+    private void initJump(InputAction.CallbackContext context)
+    {
+    }
+
+    private void stopRun(InputAction.CallbackContext context)
+    {
+        runPressed = false;
+        speed /= 2f;
+    }
+
+    public void Run(InputAction.CallbackContext context)
+    {
+        runPressed = true;
+        speed *= 2f;
+    }
+
     void Start()
     {
-        animator = GetComponent<Animator>();
-
-        isWalkingHas = Animator.StringToHash("isWalking");
-        isRunningHas = Animator.StringToHash("isRunning");
+        isWalkingHas = Animator.StringToHash("startWalk");
+        isRunningHas = Animator.StringToHash("startRun");
     }
+
     void Update()
     {
         movement();
         rotation();
     }
-
-    private void OnMovement(InputValue value)
-    {
-        Vector2 inputMovimiento = value.Get<Vector2>();
-        newPosition = new Vector3(inputMovimiento.x, 0, inputMovimiento.y);
-    }
-
     void movement()
     {
         bool isRunning = animator.GetBool(isRunningHas);
-        bool isWalking= animator.GetBool(isWalkingHas);
+        bool isWalking = animator.GetBool(isWalkingHas);
 
-        if(movementPressed && !isWalking)
+        //
+        characterController.Move(movementConverted * Time.deltaTime * speed);
+        //
+        if (characterController.isGrounded)
+        {
+            float groundedGravity = -.05f;
+            movementConverted.y = groundedGravity;
+        }
+        else
+        {
+            float gravity = -9.8f;
+            movementConverted.y += gravity;
+        }
+
+        //Detect animation to play
+        if (movementPressed && !isWalking)
         {
             animator.SetBool(isWalkingHas, true);
         }
@@ -68,20 +110,25 @@ public class playerController : MonoBehaviour
             animator.SetBool(isRunningHas, false);
         }
     }
+
     void rotation()
     {
-        Vector3 currentPosition = transform.position;
-        Vector3 newPos = new Vector3(currentMovement.x, 0, currentMovement.y);
-        Vector3 positionToLook = currentPosition + newPos;
-        transform.LookAt(positionToLook);
+        Vector3 positionToLook = new Vector3(movementConverted.x,0,movementConverted.z);
+        Quaternion currentRotation = transform.rotation;
+
+        if (movementPressed)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(positionToLook);
+            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, turnSpeed * Time.deltaTime);
+        }
     }
 
     void OnEnable()
     {
-        input.characterControls.Enable();
+        playerInputActions.characterControls.Enable();
     }
     void OnDisable()
     {
-        input.characterControls.Disable();
-    }*/
+        playerInputActions.characterControls.Disable();
+    }
 }

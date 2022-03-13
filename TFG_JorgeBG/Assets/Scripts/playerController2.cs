@@ -26,7 +26,6 @@ public class playerController2 : MonoBehaviour
 
     bool movementPressed;
     bool runPressed;
-    bool onAir = false;
 
     public float smoothInputSpeed = .02f;
 
@@ -45,7 +44,7 @@ public class playerController2 : MonoBehaviour
         playerInputActions.characterControls.Enable();
 
         playerInputActions.characterControls.Run.performed += Run;
-        playerInputActions.characterControls.Run.canceled += stop;
+        playerInputActions.characterControls.Run.canceled += stopRun;
 
         playerInputActions.characterControls.jump.performed += initJump;
     }
@@ -53,10 +52,10 @@ public class playerController2 : MonoBehaviour
     private void initJump(InputAction.CallbackContext context)
     {
         if(touchGround())
-            onAir = true;
+            m_Rigidbody.AddForce(Vector3.up * 2 * 9.8f * jumpForce);
     }
 
-    private void stop(InputAction.CallbackContext context)
+    private void stopRun(InputAction.CallbackContext context)
     {
         Debug.Log("canceled");
         runPressed = false;
@@ -96,11 +95,6 @@ public class playerController2 : MonoBehaviour
         newDirection = new Vector3(newPosition.x, 0, newPosition.y);
         //Apply
         m_Rigidbody.MovePosition(m_Rigidbody.position + newDirection * Time.deltaTime * speed);
-
-        if (onAir) {
-            m_Rigidbody.AddForce(Vector3.up * 2 * 9.8f * jumpForce);
-            onAir = false;
-        }
 
         //Detect animation to play
         if (movementPressed && !isWalking)

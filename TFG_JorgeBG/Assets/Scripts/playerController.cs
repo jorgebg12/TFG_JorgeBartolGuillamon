@@ -9,20 +9,29 @@ public class playerController : MonoBehaviour
     PlayerInputActions playerInputActions;
     CharacterController characterController;
 
-    public float speed = 2f;
-    public float turnSpeed = 10f;
-    public float jumpForce;
+    float speed = 4f;
+    float turnSpeed = 10f;
 
     int isWalkingHas;
     int isRunningHas;
+    int isJumpingHas;
 
     bool movementPressed;
     bool runPressed;
+    bool jumpPressed;
 
-    public float smoothInputSpeed = .02f;
+    float gravity = -9.8f;
+    float groundedGravity = -.05f;
+
+    bool isJumping = false;
+    bool isJumpPressed = false;
+    float maxJumpHeight =3f;
+    float maxJumpTime =0.6f;
+    float initialJumpVelocity;
 
     Vector2 movementInput;
-    Vector3 movementConverted;
+    Vector3 movementFinal;
+    Vector3 movementRunFinal;
 
     void Awake()
     {
@@ -30,67 +39,67 @@ public class playerController : MonoBehaviour
         playerInputActions = new PlayerInputActions();
         characterController = GetComponent<CharacterController>();
 
+        isWalkingHas = Animator.StringToHash("startWalk");
+        isRunningHas = Animator.StringToHash("startRun");
+        isJumpingHas = Animator.StringToHash("startJump");
+
+        //callback movement
         playerInputActions.characterControls.Movement.started += OnMove;
         playerInputActions.characterControls.Movement.performed += OnMove;
         playerInputActions.characterControls.Movement.canceled += OnMove;
-
+        //callback run
         playerInputActions.characterControls.Run.performed += Run;
-        playerInputActions.characterControls.Run.canceled += stopRun;
+        playerInputActions.characterControls.Run.canceled += Run;
+        //calback jump
+        playerInputActions.characterControls.jump.started += Jump;
+        playerInputActions.characterControls.jump.canceled += Jump;
 
-        playerInputActions.characterControls.jump.performed += initJump;
+        setupJump();
+    }
+    void setupJump()
+    {
+        float timeToApex = maxJumpTime / 2;
+        gravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
+        initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
     }
     private void OnMove(InputAction.CallbackContext ctx)
     {
         movementInput = ctx.ReadValue<Vector2>();
-        movementConverted.x = movementInput.x;
-        movementConverted.z = movementInput.y;
+        movementFinal.x = movementInput.x * 2f;
+        movementFinal.z = movementInput.y * 2f;
+        movementRunFinal.x = movementInput.x * speed;
+        movementRunFinal.z = movementInput.y * speed;
         movementPressed = movementInput.x != 0 || movementInput.y != 0;
     }
-    private void initJump(InputAction.CallbackContext context)
-    {
-    }
-
-    private void stopRun(InputAction.CallbackContext context)
-    {
-        runPressed = false;
-        speed /= 2f;
-    }
-
+    
     public void Run(InputAction.CallbackContext context)
     {
-        runPressed = true;
-        speed *= 2f;
+        runPressed = context.ReadValueAsButton();
     }
-
-    void Start()
+    private void Jump(InputAction.CallbackContext context)
     {
-        isWalkingHas = Animator.StringToHash("startWalk");
-        isRunningHas = Animator.StringToHash("startRun");
+        isJumpPressed = context.ReadValueAsButton();
     }
-
     void Update()
     {
         movement();
         rotation();
+        handleGravity();
+        handleJump();
     }
     void movement()
     {
         bool isRunning = animator.GetBool(isRunningHas);
         bool isWalking = animator.GetBool(isWalkingHas);
 
-        //
-        characterController.Move(movementConverted * Time.deltaTime * speed);
-        //
-        if (characterController.isGrounded)
-        {
-            float groundedGravity = -.05f;
-            movementConverted.y = groundedGravity;
+        //Move
+        if (runPressed){
+            characterController.Move(movementRunFinal * Time.deltaTime);
         }
-        else
-        {
-            float gravity = -9.8f;
-            movementConverted.y += gravity;
+        else{
+            characterController.Move(movementFinal * Time.deltaTime);
         }
+
 
         //Detect animation to play
         if (movementPressed && !isWalking)
@@ -113,13 +122,55 @@ public class playerController : MonoBehaviour
 
     void rotation()
     {
-        Vector3 positionToLook = new Vector3(movementConverted.x,0,movementConverted.z);
+        Vector3 positionToLook = new Vector3(movementFinal.x,0,movementFinal.z);
         Quaternion currentRotation = transform.rotation;
 
         if (movementPressed)
         {
             Quaternion targetRotation = Quaternion.LookRotation(positionToLook);
             transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, turnSpeed * Time.deltaTime);
+        }
+    }
+    void handleJump()
+    {
+        if(!isJumping && characterController.isGrounded && isJumpPressed)
+        {
+            animator.SetBool(isJumpingHas, true);
+            isJumping = true;
+            movementFinal.y = initialJumpVelocity * 0.5f;
+            movementRunFinal.y = initialJumpVelocity * 0.5f;
+        }
+        else if(!isJumpPressed && isJumping && characterController.isGrounded)
+        {
+            isJumping = false;
+        }
+    }
+    void handleGravity()
+    {
+        bool isFalling = movementFinal.y <= 0f || !isJumpPressed;
+        float fallMultiplier = 2f;
+
+        //Gravity
+        if (characterController.isGrounded)
+        {
+            animator.SetBool(isJumpingHas, false);
+            movementFinal.y = groundedGravity;
+            movementRunFinal.y = groundedGravity;
+        }else if (isFalling)
+        {
+            float previousYvelocity = movementFinal.y;
+            float newYvelocity = movementFinal.y + (gravity * fallMultiplier * Time.deltaTime);
+            float nextYvelocity = Mathf.Max((previousYvelocity + newYvelocity) * 0.5f, -20f);
+            movementFinal.y = nextYvelocity;
+            movementRunFinal.y = nextYvelocity;
+        }
+        else
+        {
+            float previousYvelocity = movementFinal.y;
+            float newYvelocity = movementFinal.y + (gravity * Time.deltaTime);
+            float nextYvelocity = (previousYvelocity + newYvelocity) * 0.5f;
+            movementFinal.y = nextYvelocity;
+            movementRunFinal.y = nextYvelocity;
         }
     }
 

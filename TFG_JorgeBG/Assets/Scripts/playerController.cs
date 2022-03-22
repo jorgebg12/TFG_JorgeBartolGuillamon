@@ -8,8 +8,9 @@ public class playerController : MonoBehaviour
     Animator animator;
     PlayerInputActions playerInputActions;
     CharacterController characterController;
+    public Transform m_camera;
 
-    float speed = 4f;
+    float speed = 2f;
     float turnSpeed = 10f;
 
     int isWalkingHas;
@@ -33,11 +34,24 @@ public class playerController : MonoBehaviour
     Vector3 movementFinal;
     Vector3 movementRunFinal;
 
+    Vector3 cameraForward;
+    Vector3 cameraRight;
+    Vector3 cameraOrient;
+    Quaternion cameraRotation;
+    float angle;
+
     void Awake()
     {
         animator = GetComponent<Animator>();
         playerInputActions = new PlayerInputActions();
         characterController = GetComponent<CharacterController>();
+
+        cameraForward = m_camera.forward;
+        cameraRight = m_camera.right;
+        cameraForward.y = 0;
+        cameraRight.y = 0;
+        cameraForward = cameraForward.normalized;
+        cameraRight = cameraRight.normalized;
 
         isWalkingHas = Animator.StringToHash("startWalk");
         isRunningHas = Animator.StringToHash("startRun");
@@ -65,10 +79,10 @@ public class playerController : MonoBehaviour
     private void OnMove(InputAction.CallbackContext ctx)
     {
         movementInput = ctx.ReadValue<Vector2>();
-        movementFinal.x = movementInput.x * 2f;
-        movementFinal.z = movementInput.y * 2f;
-        movementRunFinal.x = movementInput.x * speed;
-        movementRunFinal.z = movementInput.y * speed;
+
+        movementFinal = (movementInput.x * cameraRight + movementInput.y * cameraForward) * speed;
+        movementRunFinal = (movementInput.x * cameraRight + movementInput.y * cameraForward) * speed * 2;
+
         movementPressed = movementInput.x != 0 || movementInput.y != 0;
     }
     
@@ -93,13 +107,12 @@ public class playerController : MonoBehaviour
         bool isWalking = animator.GetBool(isWalkingHas);
 
         //Move
-        if (runPressed){
+        if (runPressed){  
             characterController.Move(movementRunFinal * Time.deltaTime);
         }
         else{
             characterController.Move(movementFinal * Time.deltaTime);
         }
-
 
         //Detect animation to play
         if (movementPressed && !isWalking)

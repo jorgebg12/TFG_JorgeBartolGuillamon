@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class playerController : MonoBehaviour
 {
     Animator animator;
-    PlayerInputActions playerInputActions;
+    [HideInInspector]public PlayerInputActions playerInputActions;
     CharacterController characterController;
     public Transform m_camera;
 

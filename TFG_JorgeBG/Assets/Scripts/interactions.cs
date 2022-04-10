@@ -9,6 +9,7 @@ public class interactions : MonoBehaviour
     playerController playerControllerScript;
 
     bool pushActive;
+    bool movingObject;
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -22,7 +23,10 @@ public class interactions : MonoBehaviour
     }
     void Update()
     {
-        
+        if (movingObject)
+        {
+
+        }
     }
     private void PushObject(InputAction.CallbackContext ctx)
     {
@@ -30,8 +34,10 @@ public class interactions : MonoBehaviour
     }
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if(hit.transform.gameObject.layer == LayerMask.NameToLayer("push") && pushActive)
+        GameObject objectHit = hit.transform.gameObject;
+        if (objectHit.layer == LayerMask.NameToLayer("push") && pushActive)
         {
+            /*
             Rigidbody rigidbody = hit.collider.attachedRigidbody;
 
             Vector3 directionPush = hit.gameObject.transform.position - transform.position;
@@ -39,6 +45,15 @@ public class interactions : MonoBehaviour
             directionPush.Normalize();
 
             rigidbody.AddForceAtPosition(directionPush * 5f, transform.position,ForceMode.Impulse);
+            */
+            
+            Vector3 direction = new Vector3(playerControllerScript.movementFinal.x,0, playerControllerScript.movementFinal.z);
+            objectHit.transform.Translate(direction * Time.deltaTime,Space.World);
+
         }
+    }
+    private void MoveObject(GameObject target)
+    {
+
     }
 }

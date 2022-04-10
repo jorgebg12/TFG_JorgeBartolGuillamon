@@ -30,8 +30,8 @@ public class playerController : MonoBehaviour
     float maxJumpTime =0.6f;
     float initialJumpVelocity;
 
-    Vector2 movementInput;
-    Vector3 movementFinal;
+    public Vector2 movementInput;
+    public Vector3 movementFinal;
     Vector3 movementRunFinal;
 
     Vector3 cameraForward;

@@ -62,6 +62,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""object_1"",
+                    ""type"": ""Button"",
+                    ""id"": ""84b2753d-1b0e-4f01-910f-42d9de988527"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +161,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""push"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e75c8d7a-f4b3-4e5c-8ccf-bccf02cfff3f"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""object_1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +184,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_characterControls_Run = m_characterControls.FindAction("Run", throwIfNotFound: true);
         m_characterControls_jump = m_characterControls.FindAction("jump", throwIfNotFound: true);
         m_characterControls_push = m_characterControls.FindAction("push", throwIfNotFound: true);
+        m_characterControls_object_1 = m_characterControls.FindAction("object_1", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -227,6 +248,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_characterControls_Run;
     private readonly InputAction m_characterControls_jump;
     private readonly InputAction m_characterControls_push;
+    private readonly InputAction m_characterControls_object_1;
     public struct CharacterControlsActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -235,6 +257,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_characterControls_Run;
         public InputAction @jump => m_Wrapper.m_characterControls_jump;
         public InputAction @push => m_Wrapper.m_characterControls_push;
+        public InputAction @object_1 => m_Wrapper.m_characterControls_object_1;
         public InputActionMap Get() { return m_Wrapper.m_characterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -256,6 +279,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @push.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPush;
                 @push.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPush;
                 @push.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPush;
+                @object_1.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnObject_1;
+                @object_1.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnObject_1;
+                @object_1.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnObject_1;
             }
             m_Wrapper.m_CharacterControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -272,6 +298,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @push.started += instance.OnPush;
                 @push.performed += instance.OnPush;
                 @push.canceled += instance.OnPush;
+                @object_1.started += instance.OnObject_1;
+                @object_1.performed += instance.OnObject_1;
+                @object_1.canceled += instance.OnObject_1;
             }
         }
     }
@@ -282,5 +311,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnPush(InputAction.CallbackContext context);
+        void OnObject_1(InputAction.CallbackContext context);
     }
 }

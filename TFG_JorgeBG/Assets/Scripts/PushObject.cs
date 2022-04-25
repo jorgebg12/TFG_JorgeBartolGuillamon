@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class interactions : MonoBehaviour
+public class PushObject : MonoBehaviour
 {
     CharacterController controller;
     playerController playerControllerScript;
@@ -12,9 +12,9 @@ public class interactions : MonoBehaviour
     bool pushActive;
     bool movingObject = false;
 
-    public int dragForce = 1;
+    int dragForce = 1;
     int pushLayer;
-    
+
     Transform pushableObject;
     Vector3 targetPosition;
     private void Awake()
@@ -25,7 +25,7 @@ public class interactions : MonoBehaviour
         pushLayer = LayerMask.NameToLayer("push");
 
         playerControllerScript.playerInputActions.characterControls.push.started += StartPush;
-        playerControllerScript.playerInputActions.characterControls.push.performed += PushObject;
+        playerControllerScript.playerInputActions.characterControls.push.performed += PerformPush;
         //playerControllerScript.playerInputActions.characterControls.push.canceled += CancelPush;
 
     }
@@ -36,10 +36,10 @@ public class interactions : MonoBehaviour
         if (movingObject)
         {
             float step = Time.deltaTime;
-            Debug.Log(pushableObject.position+" "+ targetPosition);
+            Debug.Log(pushableObject.position + " " + targetPosition);
             pushableObject.position = Vector3.MoveTowards(pushableObject.position, targetPosition, step);
 
-            if(pushableObject.position == targetPosition)
+            if (pushableObject.position == targetPosition)
             {
                 playerControllerScript.playerInputActions.characterControls.Enable();
                 movingObject = false;
@@ -50,7 +50,7 @@ public class interactions : MonoBehaviour
     // Debug raycast hit in front of the player
     void DrawRay(Vector3 startPoint, Vector3 endPoint)
     {
-        Debug.DrawLine(startPoint, endPoint, Color.blue,5);
+        Debug.DrawLine(startPoint, endPoint, Color.blue, 5);
 
         //Debug.Log("Start point: " + startPoint + " End Point: " + endPoint);
         //GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
@@ -68,7 +68,7 @@ public class interactions : MonoBehaviour
         pushActive = ctx.ReadValueAsButton();
         GetFacingObject();
     }
-    private void PushObject(InputAction.CallbackContext ctx)
+    private void PerformPush(InputAction.CallbackContext ctx)
     {
         //Move cube
         if (pushableObject != null)
@@ -149,7 +149,7 @@ public class interactions : MonoBehaviour
     private void GetFacingObject()
     {
         float bodyHeigth = transform.position.y + controller.height / 2;
-        float raycastLenght = controller.radius/2;
+        float raycastLenght = controller.radius / 2;
 
         Vector3 startPoint = new Vector3(transform.position.x, bodyHeigth, transform.position.z) + (transform.forward * controller.radius);
         Vector3 endPoint = startPoint + transform.forward;

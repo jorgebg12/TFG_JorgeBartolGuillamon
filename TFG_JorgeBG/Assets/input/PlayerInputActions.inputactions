@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "object_1",
+                    "name": "Objects",
                     "type": "Button",
                     "id": "84b2753d-1b0e-4f01-910f-42d9de988527",
                     "expectedControlType": "Button",
@@ -143,11 +143,22 @@
                 {
                     "name": "",
                     "id": "e75c8d7a-f4b3-4e5c-8ccf-bccf02cfff3f",
-                    "path": "",
+                    "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "object_1",
+                    "action": "Objects",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "83046530-f313-4fac-8b1e-db13d629e02e",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Objects",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

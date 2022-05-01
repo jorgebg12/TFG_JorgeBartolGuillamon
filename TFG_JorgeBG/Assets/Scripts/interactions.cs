@@ -35,7 +35,7 @@ public class interactions : MonoBehaviour
         //Debug.Log("angle " + Vector3.Angle(transform.forward, pushableObject.position- transform.position));
         if (movingObject)
         {
-            float step = Time.deltaTime;
+            float step = Time.deltaTime * 2;
             Debug.Log(pushableObject.position+" "+ targetPosition);
             pushableObject.position = Vector3.MoveTowards(pushableObject.position, targetPosition, step);
 

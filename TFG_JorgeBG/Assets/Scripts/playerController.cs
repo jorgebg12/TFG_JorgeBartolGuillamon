@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[DefaultExecutionOrder(-10)]
 public class playerController : MonoBehaviour
 {
     Animator animator;

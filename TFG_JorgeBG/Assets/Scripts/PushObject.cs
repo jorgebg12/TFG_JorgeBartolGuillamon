@@ -12,11 +12,13 @@ public class PushObject : MonoBehaviour
     bool pushActive;
     bool movingObject = false;
 
-    public int dragForce = 1;
+    public int moveDistance = 1;
     int pushLayer;
 
     Transform pushableObject;
+    BoxCollider colliderObject;
     Vector3 targetPosition;
+    Vector3 direction;
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -35,16 +37,7 @@ public class PushObject : MonoBehaviour
         //Debug.Log("angle " + Vector3.Angle(transform.forward, pushableObject.position- transform.position));
         if (movingObject)
         {
-            float step = Time.deltaTime * 2;
-            Debug.Log(pushableObject.position + " " + targetPosition);
-            pushableObject.position = Vector3.MoveTowards(pushableObject.position, targetPosition, step);
-
-            if (pushableObject.position == targetPosition)
-            {
-                playerControllerScript.playerInputActions.characterControls.Enable();
-                movingObject = false;
-
-            }
+            Movement();
         }
     }
     // Debug raycast hit in front of the player
@@ -109,7 +102,7 @@ public class PushObject : MonoBehaviour
     //}
     private Vector3 GetPushDirection(Transform target)
     {
-        Vector3 direction;
+        direction = Vector3.zero;
 
         float xInput = playerControllerScript.movementInput.x;
         float yInput = playerControllerScript.movementInput.y;
@@ -118,19 +111,19 @@ public class PushObject : MonoBehaviour
         {
             if (yInput > 0)//Top_right
             {
-                direction = new Vector3(0, 0, -dragForce);
+                direction = new Vector3(0, 0, -moveDistance);
             }
             else //Down_right
-                direction = new Vector3(-dragForce, 0, 0);
+                direction = new Vector3(-moveDistance, 0, 0);
         }
         else
         {
             if (yInput > 0)//Top_right
             {
-                direction = new Vector3(dragForce, 0, 0);
+                direction = new Vector3(moveDistance, 0, 0);
             }
             else //Down_right
-                direction = new Vector3(0, 0, dragForce);
+                direction = new Vector3(0, 0, moveDistance);
         }
         //Debug.Log(direction);
         //Debug.Log(direction+ target.position);
@@ -144,6 +137,23 @@ public class PushObject : MonoBehaviour
             targetPosition = GetPushDirection(pushableObject);
             movingObject = true;
             playerControllerScript.playerInputActions.characterControls.Disable();
+        }
+    }
+    private void Movement()
+    {
+        float step = Time.deltaTime * 2;
+
+        pushableObject.position = Vector3.MoveTowards(pushableObject.position, targetPosition, step);
+
+        if (pushableObject.position == targetPosition)
+        {
+            playerControllerScript.playerInputActions.characterControls.Enable();
+            movingObject = false;
+        }
+        else if (Physics.Raycast(pushableObject.position, direction, (colliderObject.size.x/2)+colliderObject.contactOffset))
+        {
+            playerControllerScript.playerInputActions.characterControls.Enable();
+            movingObject = false;
         }
     }
     private void GetFacingObject()
@@ -163,6 +173,7 @@ public class PushObject : MonoBehaviour
             {
                 Debug.Log(arrayHits[i].transform.name);
                 pushableObject = arrayHits[i].transform;
+                colliderObject = pushableObject.GetComponent<BoxCollider>();
                 break;
             }
         }

@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
+
 
 public class Inventory : MonoBehaviour
 {
@@ -12,8 +13,8 @@ public class Inventory : MonoBehaviour
     GameObject equipedItem;
     Transform handPosition;
 
-    public UnityEngine.UI.Image firstObject_UI;
-    public UnityEngine.UI.Image secondObject_UI;
+    public Image firstObject_UI;
+    public Image secondObject_UI;
 
 
     private void Awake()
@@ -22,8 +23,8 @@ public class Inventory : MonoBehaviour
 
         handPosition = GameObject.Find("mixamorig:RightHand").transform;
 
-        firstObject_UI = GameObject.Find("Slot_1").GetComponent<UnityEngine.UI.Image>();
-        secondObject_UI = GameObject.Find("Slot_2").GetComponent<UnityEngine.UI.Image>();
+        firstObject_UI = GameObject.Find("Slot_1").GetComponent<Image>();
+        secondObject_UI = GameObject.Find("Slot_2").GetComponent<Image>();
 
         playerControllerScript.playerInputActions.characterControls.Objects.started += EquipObject;
 

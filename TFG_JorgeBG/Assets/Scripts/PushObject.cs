@@ -8,11 +8,12 @@ public class PushObject : MonoBehaviour
 {
     CharacterController controller;
     playerController playerControllerScript;
+    CustomGrid customGrid;
 
     bool pushActive;
     bool movingObject = false;
 
-    public int moveDistance = 1;
+    float moveDistance = 1;
     int pushLayer;
 
     Transform pushableObject;
@@ -23,22 +24,18 @@ public class PushObject : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         playerControllerScript = GetComponent<playerController>();
+        customGrid = FindObjectOfType<CustomGrid>();
+
         controller.detectCollisions = false;
         pushLayer = LayerMask.NameToLayer("push");
 
         playerControllerScript.playerInputActions.characterControls.push.started += StartPush;
         playerControllerScript.playerInputActions.characterControls.push.performed += PerformPush;
-        //playerControllerScript.playerInputActions.characterControls.push.canceled += CancelPush;
 
     }
-
-    void Update()
+    private void Update()
     {
-        //Debug.Log("angle " + Vector3.Angle(transform.forward, pushableObject.position- transform.position));
-        if (movingObject)
-        {
-            Movement();
-        }
+
     }
     // Debug raycast hit in front of the player
     void DrawRay(Vector3 startPoint, Vector3 endPoint)
@@ -59,7 +56,7 @@ public class PushObject : MonoBehaviour
     private void StartPush(InputAction.CallbackContext ctx)
     {
         pushActive = ctx.ReadValueAsButton();
-        GetFacingObject();
+        GetFacingObject2();
     }
     private void PerformPush(InputAction.CallbackContext ctx)
     {
@@ -69,98 +66,93 @@ public class PushObject : MonoBehaviour
             StartMovement(playerControllerScript.movementInput);
         }
     }
-    private void CancelPush(InputAction.CallbackContext ctx)
+    
+    private void StartMovement(Vector2 playerInput)
     {
-        pushActive = ctx.ReadValueAsButton();
-        pushableObject = null;
+        if (playerInput != Vector2.zero)
+        {
+            Debug.Log("1");
+            GetPushDirection();
+            targetPosition = customGrid.GetCellToMove(direction, pushableObject);
+
+            Debug.Log("target : " + targetPosition);
+            if (targetPosition != new Vector3(-100,-100,-100) && movingObject == false)
+            {
+
+                Debug.Log("2");
+                movingObject = true;
+                StartCoroutine(MoveCube());
+            }
+        }
     }
-    //private void OnControllerColliderHit(ControllerColliderHit hit)
-    //{
-    //    GameObject objectHit = hit.transform.gameObject;
 
-    //    if (objectHit.layer == pushLayer)
-    //    {
-    //        if (Vector3.Angle(transform.forward, objectHit.transform.position - transform.position) < 40f)
-    //        {
-    //            if (pushActive)
-    //            {
-
-    //                //Rigidbody rigidbody = hit.collider.attachedRigidbody;
-
-    //                //Vector3 directionPush = hit.gameObject.transform.position - transform.position;
-    //                //directionPush.y = 0;
-    //                //directionPush.Normalize();
-
-    //                //rigidbody.AddForceAtPosition(directionPush * 5f, transform.position,ForceMode.Impulse);
-
-    //                MoveObjectWithoutRigidbody(objectHit);
-
-
-    //            }
-    //        }
-    //    }
-    //}
-    private Vector3 GetPushDirection(Transform target)
+    private Vector3 GetPushDirection()
     {
         direction = Vector3.zero;
 
         float xInput = playerControllerScript.movementInput.x;
         float yInput = playerControllerScript.movementInput.y;
 
-        if (xInput > 0)
+        if (xInput > 0) // X positive
         {
             if (yInput > 0)//Top_right
             {
-                direction = new Vector3(0, 0, -moveDistance);
+                return direction = new Vector3(0, 0, moveDistance);
             }
             else //Down_right
-                direction = new Vector3(-moveDistance, 0, 0);
+                return direction = new Vector3(moveDistance, 0, 0);
         }
-        else
+        else // X negative
         {
             if (yInput > 0)//Top_right
             {
-                direction = new Vector3(moveDistance, 0, 0);
+                return direction = new Vector3(-moveDistance, 0, 0);
             }
             else //Down_right
-                direction = new Vector3(0, 0, moveDistance);
+                return direction = new Vector3(0, 0, -moveDistance);
         }
-        //Debug.Log(direction);
-        //Debug.Log(direction+ target.position);
-        return direction + target.position;
     }
+    //private void Movement()
+    //{
+    //    float step = Time.deltaTime * 2;
 
-    private void StartMovement(Vector2 playerInput)
+    //    pushableObject.position = Vector3.MoveTowards(pushableObject.position, targetPosition, step);
+
+    //    if (pushableObject.position == targetPosition)
+    //    {
+    //        playerControllerScript.playerInputActions.characterControls.Enable();
+    //        movingObject = false;
+    //    }
+    //    //else if (Physics.Raycast(pushableObject.position, direction, (colliderObject.size.x/2)+colliderObject.contactOffset))
+    //    //{
+    //    //    playerControllerScript.playerInputActions.characterControls.Enable();
+    //    //    movingObject = false;
+    //    //}
+    //}
+
+    IEnumerator MoveCube() 
     {
-        if (playerInput != Vector2.zero)
-        {
-            targetPosition = GetPushDirection(pushableObject);
-            movingObject = true;
-            playerControllerScript.playerInputActions.characterControls.Disable();
-        }
-    }
-    private void Movement()
-    {
+
+        playerControllerScript.playerInputActions.characterControls.Disable();
+        targetPosition = new Vector3(targetPosition.x, pushableObject.transform.position.y, targetPosition.z);
         float step = Time.deltaTime * 2;
-
-        pushableObject.position = Vector3.MoveTowards(pushableObject.position, targetPosition, step);
-
-        if (pushableObject.position == targetPosition)
+        while (pushableObject.position != targetPosition)
         {
-            playerControllerScript.playerInputActions.characterControls.Enable();
-            movingObject = false;
+            pushableObject.position = Vector3.MoveTowards(pushableObject.position, targetPosition, step);
+            yield return null;
         }
-        else if (Physics.Raycast(pushableObject.position, direction, (colliderObject.size.x/2)+colliderObject.contactOffset))
-        {
-            playerControllerScript.playerInputActions.characterControls.Enable();
-            movingObject = false;
-        }
+
+
+        movingObject = false;
+
+        playerControllerScript.playerInputActions.characterControls.Enable();
     }
     private void GetFacingObject()
     {
-        float bodyHeigth = transform.position.y + controller.height / 2;
-        float raycastLenght = controller.radius / 2;
+        float bodyHeigth = transform.position.y + controller.height /2;
+        float raycastLenght = controller.radius;
 
+        Debug.Log(raycastLenght);
         Vector3 startPoint = new Vector3(transform.position.x, bodyHeigth, transform.position.z) + (transform.forward * controller.radius);
         Vector3 endPoint = startPoint + transform.forward;
 
@@ -169,11 +161,38 @@ public class PushObject : MonoBehaviour
 
         for (int i = 0; i < arrayHits.Length; i++)
         {
+
+            Debug.Log(arrayHits[i].transform.name);
             if (arrayHits[i].gameObject.layer == pushLayer)
             {
                 Debug.Log(arrayHits[i].transform.name);
                 pushableObject = arrayHits[i].transform;
                 colliderObject = pushableObject.GetComponent<BoxCollider>();
+
+                Debug.Log(pushableObject.name);
+                break;
+            }
+        }
+        targetPosition = Vector3.zero;
+    }
+
+    private void GetFacingObject2()
+    {
+        float bodyHeigth = transform.position.y + controller.height / 3;
+        float raycastLenght = controller.radius ;
+        
+        Vector3 startPoint = new Vector3(transform.position.x, bodyHeigth, transform.position.z);
+
+        RaycastHit[] arrayHits;
+        
+        arrayHits = Physics.RaycastAll(startPoint, transform.forward,raycastLenght);
+
+        for (int i = 0; i < arrayHits.Length; i++)
+        {
+
+            if (arrayHits[i].transform.gameObject.layer == pushLayer)
+            {
+                pushableObject = arrayHits[i].transform;
                 break;
             }
         }

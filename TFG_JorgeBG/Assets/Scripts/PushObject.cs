@@ -71,15 +71,13 @@ public class PushObject : MonoBehaviour
     {
         if (playerInput != Vector2.zero)
         {
-            Debug.Log("1");
+
             GetPushDirection();
             targetPosition = customGrid.GetCellToMove(direction, pushableObject);
 
-            Debug.Log("target : " + targetPosition);
             if (targetPosition != new Vector3(-100,-100,-100) && movingObject == false)
             {
-
-                Debug.Log("2");
+                playerControllerScript.playerInputActions.characterControls.Disable();
                 movingObject = true;
                 StartCoroutine(MoveCube());
             }

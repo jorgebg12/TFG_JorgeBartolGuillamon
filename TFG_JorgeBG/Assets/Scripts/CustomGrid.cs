@@ -6,7 +6,7 @@ public class CustomGrid : MonoBehaviour
 {
     public GameObject gridContainer;
 
-    Cell[] listOfCells;
+    Transform[] listOfCells;
 
     public float scaleOfCells = 0.7f;
 
@@ -14,23 +14,9 @@ public class CustomGrid : MonoBehaviour
     {
         gridContainer = this.gameObject;
 
-        listOfCells = gridContainer.GetComponentsInChildren<Cell>();
+        listOfCells = gridContainer.GetComponentsInChildren<Transform>();
 
-        SetUpGrid();
     }
-
-    void SetUpGrid()
-    {
-        foreach (Cell cell in listOfCells)
-        {
-            if (cell.transform.childCount > 0)
-            {
-                cell.isOcupied = true;
-
-            }
-        }
-    }
-
     public Vector3 GetCellToMove(Vector3 direction, Transform objectToMove)
     {
         Vector3 newPosi =new Vector3(-100,-100,-100);
@@ -38,31 +24,18 @@ public class CustomGrid : MonoBehaviour
         Transform cellParent = objectToMove.parent;
 
 
-        foreach (Cell cell in listOfCells)
+        foreach (Transform cell in listOfCells)
         {
             //Debug.Log("Object position: " + objectLocalPosition + " Cell position" + cell.transform.localPosition);
-            if(cell.transform.localPosition.x == (cellParent.localPosition.x+direction.x) && cell.transform.localPosition.z == (cellParent.localPosition.z +direction.z))
+            if(cell.localPosition.x == (cellParent.localPosition.x+direction.x) && cell.localPosition.z == (cellParent.localPosition.z +direction.z))
             {
-                if (cell.transform.childCount == 0)
+                if (cell.childCount == 0)
                 {
                     objectToMove.transform.parent = cell.transform;
-                    return newPosi = cell.transform.position;
+                    return newPosi = cell.position;
                 }
             }
         }
         return newPosi;
-    }
-
-    IEnumerator MoveCube(Transform pushableObject, Vector3 targetPosition)
-    {
-
-        float step = Time.deltaTime * 2;
-
-        while (pushableObject.position != targetPosition)
-        {
-            pushableObject.position = Vector3.MoveTowards(pushableObject.position, targetPosition, step);
-            yield return null;
-        }
-
     }
 }

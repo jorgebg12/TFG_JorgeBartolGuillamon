@@ -6,15 +6,22 @@ public class CustomGrid : MonoBehaviour
 {
     public GameObject gridContainer;
 
-    Transform[] listOfCells;
+    List<Transform> listOfCells;
 
     public float scaleOfCells = 0.7f;
 
     void Start()
     {
         gridContainer = this.gameObject;
+        listOfCells = new List<Transform>();
 
-        listOfCells = gridContainer.GetComponentsInChildren<Transform>();
+        foreach(Transform cell in gridContainer.GetComponentsInChildren<Transform>())
+        {
+            if(cell.tag == "Cell")
+            {
+                listOfCells.Add(cell);
+            }
+        }
 
     }
     public Vector3 GetCellToMove(Vector3 direction, Transform objectToMove)

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 678090682994434295}
   - component: {fileID: 678090682994434292}
   m_Layer: 7
-  m_Name: Cube
+  m_Name: LightPillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,8 +126,9 @@ GameObject:
   - component: {fileID: 7102143009097778051}
   - component: {fileID: 1310523662155317157}
   - component: {fileID: 6168528117868151439}
+  - component: {fileID: 220629205265929130}
   m_Layer: 8
-  m_Name: RayDetector
+  m_Name: FirstRayDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,6 +210,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.99999994, z: 1}
   m_Center: {x: 0, y: -0.000000013038516, z: 0.00000005960465}
+--- !u!114 &220629205265929130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5852641842770878044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c08478b7cc905384dab0a9cf74d51d88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opositeLightEmisor: {fileID: 0}
 --- !u!1 &7759690192764777748
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,8 +235,9 @@ GameObject:
   - component: {fileID: 4430045194326300428}
   - component: {fileID: 377662806763017976}
   - component: {fileID: 692195191580891987}
+  - component: {fileID: 239156476628022554}
   m_Layer: 8
-  m_Name: RayDetector (1)
+  m_Name: SecondRayDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -304,3 +319,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.99999994, z: 1}
   m_Center: {x: 0, y: -0.000000013038516, z: 0.00000005960465}
+--- !u!114 &239156476628022554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7759690192764777748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c08478b7cc905384dab0a9cf74d51d88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opositeLightEmisor: {fileID: 0}

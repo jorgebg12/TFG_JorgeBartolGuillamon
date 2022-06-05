@@ -9,38 +9,39 @@ public class LightPropagation : MonoBehaviour
     LineRenderer lineRenderer;
     Vector3[] lightPoints;
 
-
     public int rayDetectorLayer;
+    public int receptorLayer;
 
-    private void Start()
+    void Start()
     {
-        
         lineRenderer = FindObjectOfType<LineRenderer>();
 
         rayDetectorLayer = LayerMask.NameToLayer("rayDetection");
+        receptorLayer = LayerMask.NameToLayer("receptorDetection");
     }
     public void PropagateRay()
     {
-
         RaycastHit raycasthit;
 
         Vector3 origin = opositeLightEmisor.position;
         Vector3 direction = opositeLightEmisor.right;
-
-        //Debug.DrawRay(origin, direction, Color.blue,600f);
 
         if (Physics.Raycast(origin, direction, out raycasthit))
         {
 
             if (raycasthit.collider.transform.gameObject.layer == rayDetectorLayer)
             {
-
                 DrawLightRay(lightPoints = new Vector3[] { opositeLightEmisor.transform.position, raycasthit.point });
                 raycasthit.collider.transform.gameObject.GetComponent<LightPropagation>().PropagateRay();
             }
+            else if(raycasthit.collider.transform.gameObject.layer == receptorLayer)
+            {
+                DrawLightRay(lightPoints = new Vector3[] { opositeLightEmisor.transform.position, raycasthit.point });
+                raycasthit.collider.transform.gameObject.GetComponent<LightReceptor>().CompletedPuzzle();
+            }else
+                DrawLightRay(lightPoints = new Vector3[] { opositeLightEmisor.transform.position, raycasthit.point });
         }
     }
-
     void DrawLightRay(Vector3[] points)
     {
         int index = lineRenderer.positionCount;

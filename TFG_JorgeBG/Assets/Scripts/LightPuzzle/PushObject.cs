@@ -13,46 +13,35 @@ public class PushObject : MonoBehaviour
     bool pushActive;
     bool movingObject = false;
 
-    float moveDistance = 1;
     int pushLayer;
 
     Transform pushableObject;
     BoxCollider colliderObject;
     Vector3 targetPosition;
     Vector3 direction;
+
+    Vector3 gizmoSpherePosition;
+    float gizmoSphereRadius;
+
     private void Awake()
     {
-        controller = GetComponent<CharacterController>();
-        playerControllerScript = GetComponent<playerController>();
+        controller = FindObjectOfType<CharacterController>();
+        playerControllerScript = FindObjectOfType<playerController>();
         customGrid = FindObjectOfType<CustomGrid>();
 
         controller.detectCollisions = false;
         pushLayer = LayerMask.NameToLayer("push");
-
+    }
+    private void OnEnable()
+    {
         playerControllerScript.playerInputActions.characterControls.push.started += StartPush;
         playerControllerScript.playerInputActions.characterControls.push.performed += PerformPush;
-
     }
-    private void Update()
+    private void OnDisable()
     {
-
+        playerControllerScript.playerInputActions.characterControls.push.started -= StartPush;
+        playerControllerScript.playerInputActions.characterControls.push.performed -= PerformPush;
     }
-    // Debug raycast hit in front of the player
-    void DrawRay(Vector3 startPoint, Vector3 endPoint)
-    {
-        Debug.DrawLine(startPoint, endPoint, Color.blue, 5);
-
-        //Debug.Log("Start point: " + startPoint + " End Point: " + endPoint);
-        //GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        //sphere.transform.position = startPoint;
-        //sphere.GetComponent<Collider>().isTrigger = true;
-        //sphere.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        //GameObject sphere1 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        //sphere1.transform.position = endPoint;
-        //sphere1.GetComponent<Collider>().isTrigger = true;
-        //sphere1.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-    }
-    //Click of the push action bind
     private void StartPush(InputAction.CallbackContext ctx)
     {
         pushActive = ctx.ReadValueAsButton();
@@ -61,17 +50,17 @@ public class PushObject : MonoBehaviour
     private void PerformPush(InputAction.CallbackContext ctx)
     {
         //Move cube
-        if (pushableObject != null)
+        if (pushableObject != null && pushActive)
         {
             StartMovement(playerControllerScript.movementInput);
         }
     }
-    
     private void StartMovement(Vector2 playerInput)
     {
         if (playerInput != Vector2.zero)
         {
 
+            EventManager.OnClearLine();
             GetPushDirection();
             targetPosition = customGrid.GetCellToMove(direction, pushableObject);
 
@@ -83,7 +72,6 @@ public class PushObject : MonoBehaviour
             }
         }
     }
-
     private Vector3 GetPushDirection()
     {
         direction = Vector3.zero;
@@ -95,39 +83,21 @@ public class PushObject : MonoBehaviour
         {
             if (yInput > 0)//Top_right
             {
-                return direction = new Vector3(0, 0, moveDistance);
+                return direction = new Vector3(0, 0, 1);
             }
             else //Down_right
-                return direction = new Vector3(moveDistance, 0, 0);
+                return direction = new Vector3(1, 0, 0);
         }
         else // X negative
         {
             if (yInput > 0)//Top_right
             {
-                return direction = new Vector3(-moveDistance, 0, 0);
+                return direction = new Vector3(-1, 0, 0);
             }
             else //Down_right
-                return direction = new Vector3(0, 0, -moveDistance);
+                return direction = new Vector3(0, 0, -1);
         }
     }
-    //private void Movement()
-    //{
-    //    float step = Time.deltaTime * 2;
-
-    //    pushableObject.position = Vector3.MoveTowards(pushableObject.position, targetPosition, step);
-
-    //    if (pushableObject.position == targetPosition)
-    //    {
-    //        playerControllerScript.playerInputActions.characterControls.Enable();
-    //        movingObject = false;
-    //    }
-    //    //else if (Physics.Raycast(pushableObject.position, direction, (colliderObject.size.x/2)+colliderObject.contactOffset))
-    //    //{
-    //    //    playerControllerScript.playerInputActions.characterControls.Enable();
-    //    //    movingObject = false;
-    //    //}
-    //}
-
     IEnumerator MoveCube() 
     {
 
@@ -140,26 +110,26 @@ public class PushObject : MonoBehaviour
             yield return null;
         }
 
-
+        EventManager.OnRecalculateLine();
         movingObject = false;
-
+        pushableObject = null;
         playerControllerScript.playerInputActions.characterControls.Enable();
-    }
-    private void GetFacingObject()
-    {
-        float bodyHeigth = transform.position.y + controller.height /2;
-        float raycastLenght = controller.radius;
 
-        Debug.Log(raycastLenght);
-        Vector3 startPoint = new Vector3(transform.position.x, bodyHeigth, transform.position.z) + (transform.forward * controller.radius);
-        Vector3 endPoint = startPoint + transform.forward;
+    }
+    private void GetFacingObject2()
+    {
+        float bodyHeigth = controller.transform.position.y + (controller.height /3);
+        float raycastLenght = controller.radius/1.5f;
+
+        Vector3 startPoint = new Vector3(controller.transform.position.x, bodyHeigth, controller.transform.position.z) + (controller.transform.forward * controller.radius/2);
+
+        
 
         Collider[] arrayHits;
         arrayHits = Physics.OverlapSphere(startPoint, raycastLenght);
-
+        
         for (int i = 0; i < arrayHits.Length; i++)
         {
-
             Debug.Log(arrayHits[i].transform.name);
             if (arrayHits[i].gameObject.layer == pushLayer)
             {
@@ -174,16 +144,16 @@ public class PushObject : MonoBehaviour
         targetPosition = Vector3.zero;
     }
 
-    private void GetFacingObject2()
+    private void GetFacingObject()
     {
-        float bodyHeigth = transform.position.y + controller.height / 3;
-        float raycastLenght = controller.radius ;
+        float bodyHeigth = controller.transform.position.y + controller.height/3;
+        float raycastLenght = controller.radius/2 ;
         
-        Vector3 startPoint = new Vector3(transform.position.x, bodyHeigth, transform.position.z);
+        Vector3 startPoint = new Vector3(controller.transform.position.x, bodyHeigth, controller.transform.position.z);
 
         RaycastHit[] arrayHits;
         
-        arrayHits = Physics.RaycastAll(startPoint, transform.forward,raycastLenght);
+        arrayHits = Physics.RaycastAll(startPoint, controller.transform.forward, raycastLenght);
 
         for (int i = 0; i < arrayHits.Length; i++)
         {
@@ -194,5 +164,9 @@ public class PushObject : MonoBehaviour
                 break;
             }
         }
+    }
+    private void OnDrawGizmos()
+    {
+        //Gizmos.DrawSphere(gizmoSpherePosition,gizmoSphereRadius);
     }
 }

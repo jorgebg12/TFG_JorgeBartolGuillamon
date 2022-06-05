@@ -1238,7 +1238,6 @@ GameObject:
   - component: {fileID: 2142221014425174707}
   - component: {fileID: 4616557755757298301}
   - component: {fileID: 4616557755757298290}
-  - component: {fileID: 4616557755757298300}
   - component: {fileID: 4616557755757298303}
   m_Layer: 2
   m_Name: Player
@@ -1256,7 +1255,7 @@ Transform:
   m_GameObject: {fileID: 4616557755757298291}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2.92, z: -0.23}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 3296494920317141172}
   - {fileID: 5097109093867853942}
@@ -1317,19 +1316,6 @@ MonoBehaviour:
   m_camera: {fileID: 0}
   movementInput: {x: 0, y: 0}
   movementFinal: {x: 0, y: 0, z: 0}
---- !u!114 &4616557755757298300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4616557755757298291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1c9e52f17df53d4bbe549445229ad70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveDistance: 1
 --- !u!114 &4616557755757298303
 MonoBehaviour:
   m_ObjectHideFlags: 0

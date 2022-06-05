@@ -58,17 +58,6 @@ public class playerController : MonoBehaviour
         isRunningHas = Animator.StringToHash("startRun");
         isJumpingHas = Animator.StringToHash("startJump");
 
-        //callback movement
-        playerInputActions.characterControls.Movement.started += OnMove;
-        playerInputActions.characterControls.Movement.performed += OnMove;
-        playerInputActions.characterControls.Movement.canceled += OnMove;
-        //callback run
-        playerInputActions.characterControls.Run.performed += Run;
-        playerInputActions.characterControls.Run.canceled += Run;
-        //calback jump
-        playerInputActions.characterControls.jump.started += Jump;
-        playerInputActions.characterControls.jump.canceled += Jump;
-
         setupJump();
     }
     void setupJump()
@@ -191,9 +180,29 @@ public class playerController : MonoBehaviour
     void OnEnable()
     {
         playerInputActions.characterControls.Enable();
+        //callback movement
+        playerInputActions.characterControls.Movement.started += OnMove;
+        playerInputActions.characterControls.Movement.performed += OnMove;
+        playerInputActions.characterControls.Movement.canceled += OnMove;
+        //callback run
+        playerInputActions.characterControls.Run.performed += Run;
+        playerInputActions.characterControls.Run.canceled += Run;
+        //calback jump
+        playerInputActions.characterControls.jump.started += Jump;
+        playerInputActions.characterControls.jump.canceled += Jump;
     }
     void OnDisable()
     {
         playerInputActions.characterControls.Disable();
+        //callback movement
+        playerInputActions.characterControls.Movement.started -= OnMove;
+        playerInputActions.characterControls.Movement.performed -= OnMove;
+        playerInputActions.characterControls.Movement.canceled -= OnMove;
+        //callback run
+        playerInputActions.characterControls.Run.performed -= Run;
+        playerInputActions.characterControls.Run.canceled -= Run;
+        //calback jump
+        playerInputActions.characterControls.jump.started -= Jump;
+        playerInputActions.characterControls.jump.canceled -= Jump;
     }
 }

@@ -1,26 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MatchRotatationsManager : MonoBehaviour
 {
-    public Transform piecePuzzle_1;
-    public Transform piecePuzzle_2;
-    public Transform piecePuzzle_3;
-    public Transform piecePuzzle_4;
+    playerController playerControlls;
 
-    public GameObject changeRotation_1;
-    public GameObject changeRotation_2;
-    public GameObject changeRotation_3;
-    public GameObject changeRotation_4;
+    public MatchElement[] puzzlePieces;
 
-    enum RotationState
+    private void OnEnable()
     {
-
-    }
-    void Start()
-    {
-        
+        playerControlls.playerInputActions.characterControls.UseObject.started += OnUseObject;
     }
 
+    private void OnDisable()
+    {
+        playerControlls.playerInputActions.characterControls.UseObject.started -= OnUseObject;
+    }
+    private void Awake()
+    {
+        playerControlls = FindObjectOfType<playerController>();
+    }
+    private void OnUseObject(InputAction.CallbackContext obj)
+    {
+        puzzlePieces[0].RotateObject();
+    }
 }

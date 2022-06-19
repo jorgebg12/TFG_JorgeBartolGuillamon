@@ -12,12 +12,12 @@ public class MatchRotatationsManager : MonoBehaviour
 
     private void OnEnable()
     {
-        playerControlls.playerInputActions.characterControls.UseObject.started += OnUseObject;
+        //playerControlls.playerInputActions.characterControls.UseObject.started += OnUseObject;
     }
 
     private void OnDisable()
     {
-        playerControlls.playerInputActions.characterControls.UseObject.started -= OnUseObject;
+        //playerControlls.playerInputActions.characterControls.UseObject.started -= OnUseObject;
     }
     private void Awake()
     {

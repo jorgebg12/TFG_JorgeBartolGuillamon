@@ -7,6 +7,7 @@ public class EventManager : MonoBehaviour
 {
     public static event Action RecalculateLine;
     public static event Action ClearLine;
+    public static event Action ChangeMode;
 
     public static void OnRecalculateLine()
     {
@@ -21,6 +22,14 @@ public class EventManager : MonoBehaviour
         if (ClearLine != null)
         {
             ClearLine();
+        }
+    }
+
+    public static void OnChangeMode()
+    {
+        if (ChangeMode != null)
+        {
+            ChangeMode();
         }
     }
 }

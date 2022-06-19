@@ -18,6 +18,7 @@ public class MatchElement : MonoBehaviour
     float timeToRotate = 1f;
     float rotationSpeed = 2f;
     [HideInInspector] public bool isRotating = false;
+
     public enum RotationState
     {
         rotateLeft,
@@ -43,25 +44,28 @@ public class MatchElement : MonoBehaviour
                 StartCoroutine(DontRotate());
         }
     }
-    void ChangeRotationMode()
+    public void ChangeRotationMode()
     {
 
-        //if(rotationState == RotationState.rotateLeft)
-        //{
-        //    rotationState = RotationState.rotateRight;
-        //}
-        //else if (rotationState ==RotationState.rotateRight)
-        //{
-        //    rotationState = RotationState.stay;
-        //}
-        //else
-        //{
-        //    rotationState = RotationState.rotateLeft;
-        //}
-        if (rotationState == RotationState.stay)
-            rotationState = RotationState.rotateLeft;
+        if (rotationState == RotationState.rotateLeft)
+        {
+            rotationState = RotationState.rotateRight;
+            sphereChangeMode.GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/Rotate_Mode_1");
+        }
+        else if (rotationState == RotationState.rotateRight)
+        {
+            rotationState = RotationState.stay;
+            sphereChangeMode.GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/Rotate_Mode_2");
+        }
         else
-            rotationState++;
+        {
+            rotationState = RotationState.rotateLeft;
+            sphereChangeMode.GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/Rotate_Mode_3");
+        }
+        //if (rotationState == RotationState.stay)
+        //    rotationState = RotationState.rotateLeft;
+        //else
+        //    rotationState++;
     }
     public bool CheckRotation()
     {

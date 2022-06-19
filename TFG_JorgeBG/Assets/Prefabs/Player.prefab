@@ -1238,7 +1238,6 @@ GameObject:
   - component: {fileID: 2142221014425174707}
   - component: {fileID: 4616557755757298301}
   - component: {fileID: 4616557755757298290}
-  - component: {fileID: 4616557755757298303}
   m_Layer: 2
   m_Name: Player
   m_TagString: Untagged
@@ -1314,22 +1313,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_camera: {fileID: 0}
+  hand: {fileID: 6153478165866725610}
   movementInput: {x: 0, y: 0}
   movementFinal: {x: 0, y: 0, z: 0}
---- !u!114 &4616557755757298303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4616557755757298291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 755954b5aee81764b8556cc37bd30c1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firstObject_UI: {fileID: 0}
-  secondObject_UI: {fileID: 0}
 --- !u!1 &4809362789942957655
 GameObject:
   m_ObjectHideFlags: 0

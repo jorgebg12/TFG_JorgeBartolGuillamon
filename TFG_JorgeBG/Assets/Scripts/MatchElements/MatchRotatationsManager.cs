@@ -25,6 +25,40 @@ public class MatchRotatationsManager : MonoBehaviour
     }
     private void OnUseObject(InputAction.CallbackContext obj)
     {
-        puzzlePieces[0].RotateObject();
+        StartCoroutine(StartRotations());
+    }
+    IEnumerator StartRotations()
+    {
+        foreach(MatchElement element in puzzlePieces)
+        {
+            element.RotateObject();
+            element.isRotating = true;
+            while (element.isRotating)
+                yield return null;
+        }
+
+        CheckCompleted();
+
+
+    }
+
+    void CheckCompleted()
+    {
+        foreach (MatchElement element in puzzlePieces)
+        {
+            Debug.Log(element.name + " " + element.CheckRotation());
+            if (!element.CheckRotation())
+            {
+                return;
+            }
+        }
+        StartCoroutine(LoadNewLevel());
+
+
+    }
+
+    IEnumerator LoadNewLevel()
+    {
+        yield return null;
     }
 }

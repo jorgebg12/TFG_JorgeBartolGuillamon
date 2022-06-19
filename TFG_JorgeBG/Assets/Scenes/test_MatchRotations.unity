@@ -817,11 +817,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationState: 0
-  desiredRotation: {x: 0, y: 0, z: 0}
-  rotationModeChanger: {fileID: 843939169}
+  desiredRotation: {x: 0, y: 0, z: 90}
+  currentRotation: {x: 0, y: 0, z: 0}
+  sphereChangeMode: {fileID: 843939169}
+  rotatingObject: {fileID: 778122315}
   leftObject: {fileID: 2056252506}
   centralObject: {fileID: 778122316}
   rightObject: {fileID: 1897942978}
+  isRotating: 0
 --- !u!1 &843939169
 GameObject:
   m_ObjectHideFlags: 0
@@ -1434,12 +1437,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88bc7f2a070a6d443ae1d218e3e099d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationState: 0
-  desiredRotation: {x: 0, y: 0, z: 0}
-  rotationModeChanger: {fileID: 2048779469}
+  rotationState: 1
+  desiredRotation: {x: 0, y: 0, z: 90}
+  currentRotation: {x: 0, y: 0, z: 0}
+  sphereChangeMode: {fileID: 2048779469}
+  rotatingObject: {fileID: 1897942977}
   leftObject: {fileID: 778122316}
   centralObject: {fileID: 1897942978}
   rightObject: {fileID: 1623519061842944939}
+  isRotating: 0
 --- !u!1 &1630027028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1536,12 +1542,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88bc7f2a070a6d443ae1d218e3e099d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationState: 0
-  desiredRotation: {x: 0, y: 0, z: 0}
-  rotationModeChanger: {fileID: 1102105980}
+  rotationState: 1
+  desiredRotation: {x: 0, y: 0, z: 90}
+  currentRotation: {x: 0, y: 0, z: 0}
+  sphereChangeMode: {fileID: 1102105980}
+  rotatingObject: {fileID: 2056252505}
   leftObject: {fileID: 1623519061842944939}
   centralObject: {fileID: 2056252506}
   rightObject: {fileID: 778122316}
+  isRotating: 0
 --- !u!1 &1803447503
 GameObject:
   m_ObjectHideFlags: 0
@@ -1874,7 +1883,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2056252505}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1630027031}
@@ -2527,12 +2536,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88bc7f2a070a6d443ae1d218e3e099d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationState: 0
-  desiredRotation: {x: 0, y: 0, z: 0}
-  rotationModeChanger: {fileID: 1398725658}
+  rotationState: 2
+  desiredRotation: {x: 0, y: 0, z: 90}
+  currentRotation: {x: 0, y: 0, z: 0}
+  sphereChangeMode: {fileID: 1398725658}
+  rotatingObject: {fileID: 4999627690484608418}
   leftObject: {fileID: 1897942978}
   centralObject: {fileID: 1623519061842944939}
   rightObject: {fileID: 2056252506}
+  isRotating: 0
 --- !u!4 &2178470719027055225
 Transform:
   m_ObjectHideFlags: 0

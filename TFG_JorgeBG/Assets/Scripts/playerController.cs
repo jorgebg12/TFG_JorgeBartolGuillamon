@@ -11,6 +11,8 @@ public class playerController : MonoBehaviour
     CharacterController characterController;
     public Transform m_camera;
 
+    public Transform hand;
+
     float speed = 2f;
     float turnSpeed = 10f;
 
@@ -37,9 +39,6 @@ public class playerController : MonoBehaviour
 
     Vector3 cameraForward;
     Vector3 cameraRight;
-    Vector3 cameraOrient;
-    Quaternion cameraRotation;
-    float angle;
 
     void Awake()
     {

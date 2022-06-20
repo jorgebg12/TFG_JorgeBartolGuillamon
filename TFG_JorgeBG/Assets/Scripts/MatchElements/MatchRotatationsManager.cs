@@ -7,25 +7,29 @@ using UnityEngine.InputSystem;
 public class MatchRotatationsManager : MonoBehaviour
 {
     playerController playerControlls;
+    bool isRotating = false;
 
     public MatchElement[] puzzlePieces;
 
     private void OnEnable()
     {
-        //playerControlls.playerInputActions.characterControls.UseObject.started += OnUseObject;
+        EventManager.PressButton += OnUseObject;
     }
-
     private void OnDisable()
     {
-        //playerControlls.playerInputActions.characterControls.UseObject.started -= OnUseObject;
+        EventManager.PressButton -= OnUseObject;
     }
     private void Awake()
     {
         playerControlls = FindObjectOfType<playerController>();
     }
-    private void OnUseObject(InputAction.CallbackContext obj)
+    private void OnUseObject()
     {
-        StartCoroutine(StartRotations());
+        if (!isRotating)
+        {
+            isRotating = true;
+            StartCoroutine(StartRotations());
+        }
     }
     IEnumerator StartRotations()
     {
@@ -38,7 +42,7 @@ public class MatchRotatationsManager : MonoBehaviour
         }
 
         CheckCompleted();
-
+        isRotating = false;
 
     }
 

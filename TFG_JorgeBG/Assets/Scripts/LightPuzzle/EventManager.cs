@@ -7,7 +7,7 @@ public class EventManager : MonoBehaviour
 {
     public static event Action RecalculateLine;
     public static event Action ClearLine;
-    public static event Action ChangeMode;
+    public static event Action PressButton;
 
     public static void OnRecalculateLine()
     {
@@ -25,11 +25,11 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public static void OnChangeMode()
+    public static void OnPressButton()
     {
-        if (ChangeMode != null)
+        if (PressButton != null)
         {
-            ChangeMode();
+            PressButton();
         }
     }
 }

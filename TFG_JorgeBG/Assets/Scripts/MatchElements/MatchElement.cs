@@ -21,11 +21,14 @@ public class MatchElement : MonoBehaviour
 
     public enum RotationState
     {
-        rotateLeft,
-        rotateRight,
-        stay
+        rotateLeft,//Mode_1
+        rotateRight,//Mode_2
+        stay//Mode_3
     }
-
+    private void Start()
+    {
+        SetMaterials();
+    }
     public void RotateObject()
     {
         if (rotationState == RotationState.rotateLeft)
@@ -44,23 +47,39 @@ public class MatchElement : MonoBehaviour
                 StartCoroutine(DontRotate());
         }
     }
+
+    void SetMaterials()
+    {
+        if (rotationState == RotationState.rotateLeft)
+        {
+            sphereChangeMode.GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/Rotate_Mode_1");
+        }
+        else if (rotationState == RotationState.rotateRight)
+        {
+            sphereChangeMode.GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/Rotate_Mode_2");
+        }
+        else
+        {
+            sphereChangeMode.GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/Rotate_Mode_3");
+        }
+    }
     public void ChangeRotationMode()
     {
 
         if (rotationState == RotationState.rotateLeft)
         {
             rotationState = RotationState.rotateRight;
-            sphereChangeMode.GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/Rotate_Mode_1");
+            sphereChangeMode.GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/Rotate_Mode_2");
         }
         else if (rotationState == RotationState.rotateRight)
         {
             rotationState = RotationState.stay;
-            sphereChangeMode.GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/Rotate_Mode_2");
+            sphereChangeMode.GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/Rotate_Mode_3");
         }
         else
         {
             rotationState = RotationState.rotateLeft;
-            sphereChangeMode.GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/Rotate_Mode_3");
+            sphereChangeMode.GetComponent<MeshRenderer>().material = Resources.Load<Material>("Materials/Rotate_Mode_1");
         }
         //if (rotationState == RotationState.stay)
         //    rotationState = RotationState.rotateLeft;

@@ -5,10 +5,7 @@ using UnityEngine;
 public class CustomGrid : MonoBehaviour
 {
     public GameObject gridContainer;
-
     List<Transform> listOfCells;
-
-    public float scaleOfCells = 0.7f;
 
     void Start()
     {

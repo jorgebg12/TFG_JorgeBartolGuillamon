@@ -8,6 +8,7 @@ public class EventManager : MonoBehaviour
     public static event Action RecalculateLine;
     public static event Action ClearLine;
     public static event Action PressButton;
+    public static event Action CompleteLevel;
 
     public static void OnRecalculateLine()
     {
@@ -30,6 +31,14 @@ public class EventManager : MonoBehaviour
         if (PressButton != null)
         {
             PressButton();
+        }
+    }
+
+    public static void OnCompleteLevel() 
+    { 
+        if(CompleteLevel != null)
+        {
+            CompleteLevel();
         }
     }
 }

@@ -17,6 +17,8 @@ public class MainSceneManager : MonoBehaviour
     public Button buttonLevel_3;
     
     float animationTime =2f;
+
+    bool isMovingObjects = false;
     void Start()
     {
         rectTransformCanvas=FindObjectOfType<Canvas>().GetComponent<RectTransform>();
@@ -47,9 +49,13 @@ public class MainSceneManager : MonoBehaviour
     }
     public void LoadLevelSelector()
     {
-        StartCoroutine(MoveObjectOutsideCanvasLeft(title));
-        StartCoroutine(MoveObjectOutsideCanvasLeft(mainButtons));
-        StartCoroutine(MoveObjectCenterCanvas(scrollLevels));
+        if (!isMovingObjects)
+        {
+            isMovingObjects = true;
+            StartCoroutine(MoveObjectOutsideCanvasLeft(title));
+            StartCoroutine(MoveObjectOutsideCanvasLeft(mainButtons));
+            StartCoroutine(MoveObjectCenterCanvas(scrollLevels));
+        }
     }
     public void LoadOptions()
     {
@@ -62,9 +68,13 @@ public class MainSceneManager : MonoBehaviour
 
     public void ReturnToMain()
     {
-        StartCoroutine(MoveObjectCenterCanvas(title));
-        StartCoroutine(MoveObjectCenterCanvas(mainButtons));
-        StartCoroutine(MoveObjectOutsideCanvasRight(scrollLevels));
+        if (!isMovingObjects)
+        {
+            isMovingObjects = true;
+            StartCoroutine(MoveObjectCenterCanvas(title));
+            StartCoroutine(MoveObjectCenterCanvas(mainButtons));
+            StartCoroutine(MoveObjectOutsideCanvasRight(scrollLevels));
+        }
     }
 
     IEnumerator MoveObjectOutsideCanvasLeft(RectTransform rectTransform)
@@ -107,5 +117,6 @@ public class MainSceneManager : MonoBehaviour
             yield return null;
         }
         rectTransform.anchoredPosition = endPosition;
+        isMovingObjects = false;
     }
 }

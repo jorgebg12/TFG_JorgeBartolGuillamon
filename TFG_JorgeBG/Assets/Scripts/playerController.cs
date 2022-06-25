@@ -8,7 +8,7 @@ public class playerController : MonoBehaviour
 {
     Animator animator;
     [HideInInspector]public PlayerInputActions playerInputActions;
-    CharacterController characterController;
+    [HideInInspector]public CharacterController characterController;
     public Transform m_camera;
 
     public Transform hand;

@@ -80,6 +80,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""a7eb4fd1-6dbe-42d2-a7b6-027ca2ec533b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -201,6 +210,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""UseObject"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5066269a-9202-482b-9cc4-a192d331c44f"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -733,6 +753,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_characterControls_push = m_characterControls.FindAction("push", throwIfNotFound: true);
         m_characterControls_Objects = m_characterControls.FindAction("Objects", throwIfNotFound: true);
         m_characterControls_UseObject = m_characterControls.FindAction("UseObject", throwIfNotFound: true);
+        m_characterControls_PauseMenu = m_characterControls.FindAction("PauseMenu", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -810,6 +831,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_characterControls_push;
     private readonly InputAction m_characterControls_Objects;
     private readonly InputAction m_characterControls_UseObject;
+    private readonly InputAction m_characterControls_PauseMenu;
     public struct CharacterControlsActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -820,6 +842,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @push => m_Wrapper.m_characterControls_push;
         public InputAction @Objects => m_Wrapper.m_characterControls_Objects;
         public InputAction @UseObject => m_Wrapper.m_characterControls_UseObject;
+        public InputAction @PauseMenu => m_Wrapper.m_characterControls_PauseMenu;
         public InputActionMap Get() { return m_Wrapper.m_characterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -847,6 +870,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @UseObject.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnUseObject;
                 @UseObject.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnUseObject;
                 @UseObject.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnUseObject;
+                @PauseMenu.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPauseMenu;
+                @PauseMenu.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPauseMenu;
+                @PauseMenu.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnPauseMenu;
             }
             m_Wrapper.m_CharacterControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -869,6 +895,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @UseObject.started += instance.OnUseObject;
                 @UseObject.performed += instance.OnUseObject;
                 @UseObject.canceled += instance.OnUseObject;
+                @PauseMenu.started += instance.OnPauseMenu;
+                @PauseMenu.performed += instance.OnPauseMenu;
+                @PauseMenu.canceled += instance.OnPauseMenu;
             }
         }
     }
@@ -986,6 +1015,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnPush(InputAction.CallbackContext context);
         void OnObjects(InputAction.CallbackContext context);
         void OnUseObject(InputAction.CallbackContext context);
+        void OnPauseMenu(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

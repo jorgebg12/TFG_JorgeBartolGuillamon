@@ -22,6 +22,6 @@ public class LightReceptor : MonoBehaviour
         //Que no se pueda mover las cosas
 
         //Desbloquear salida y cargar siguiente nivel
-
+        EventManager.OnCompleteLevel();
     }
 }

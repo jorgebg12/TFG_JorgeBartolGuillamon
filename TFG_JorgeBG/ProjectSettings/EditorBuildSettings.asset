@@ -12,12 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: a9cbe3f9d29da6a44ae60ae9fb3181d9
   - enabled: 1
-    path: Assets/Scenes/test/tutorial.unity
-    guid: 047f1e3ea94df01438806330261b6b26
+    path: Assets/Scenes/Tutorial.unity
+    guid: 82429e1177b9be34fac63dfe438ebeb1
   - enabled: 1
-    path: Assets/Scenes/test/test_light.unity
-    guid: f5b6a77267e81b94ca4d7dbfcc157beb
+    path: Assets/Scenes/Level_1.unity
+    guid: f6a56fa76bc4f194daa06d7492e32266
   - enabled: 1
-    path: Assets/Scenes/test/test_MatchRotations.unity
-    guid: 58bba8a7055619f4f9eeba1bda819481
+    path: Assets/Scenes/Level_2.unity
+    guid: ed67f150a126d7b4b89217015a127e98
+  - enabled: 1
+    path: Assets/Scenes/Level_3.unity
+    guid: 48fc707abdbc94046aae6b18b9768df1
   m_configObjects: {}

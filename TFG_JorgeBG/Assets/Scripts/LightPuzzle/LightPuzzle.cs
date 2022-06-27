@@ -35,9 +35,9 @@ public class LightPuzzle : MonoBehaviour
         playerController = FindObjectOfType<playerController>();
 
     }
-    void Update()
+    private void Start()
     {
-        //GenerateLight();
+        EventManager.OnRecalculateLine();
     }
     void OnUseObject(InputAction.CallbackContext obj)
     {

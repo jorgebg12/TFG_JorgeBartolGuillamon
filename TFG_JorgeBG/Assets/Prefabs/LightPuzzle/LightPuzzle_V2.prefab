@@ -544,7 +544,7 @@ GameObject:
   - component: {fileID: 1651069743578253887}
   - component: {fileID: 7188315512242633783}
   m_Layer: 0
-  m_Name: LightPuzzle
+  m_Name: LightPuzzle_V2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2072,7 +2072,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5438776868858244430}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.8666666, y: 0.6055556, z: 1}
+  m_LocalPosition: {x: -4, y: 0.6, z: 1}
   m_LocalScale: {x: 0.7333334, y: 1.1111112, z: 1}
   m_Children:
   - {fileID: 4079533026857421419}
@@ -2550,7 +2550,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7629213888012258827}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.8666666, y: 0.6055556, z: -3}
+  m_LocalPosition: {x: -4, y: 0.6, z: -3}
   m_LocalScale: {x: 0.7333334, y: 1.1111112, z: 1}
   m_Children:
   - {fileID: 3862652119126472025}

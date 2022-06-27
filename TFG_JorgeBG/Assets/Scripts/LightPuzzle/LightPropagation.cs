@@ -12,7 +12,7 @@ public class LightPropagation : MonoBehaviour
     public int rayDetectorLayer;
     public int receptorLayer;
 
-    void Start()
+    void Awake()
     {
         lineRenderer = FindObjectOfType<LineRenderer>();
 

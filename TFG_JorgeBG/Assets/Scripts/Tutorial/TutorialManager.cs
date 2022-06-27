@@ -13,15 +13,9 @@ public class TutorialManager : MonoBehaviour
 
     public bool objectOnPlace = false;
 
-    private void OnEnable()
+    private void Start()
     {
         playerControllerScript = FindObjectOfType<playerController>();
-        EventManager.CompleteLevel += StartNextLevel;
-    }
-
-    private void OnDisable()
-    {
-        EventManager.CompleteLevel -= StartNextLevel;
     }
     void Update()
     {
@@ -38,8 +32,4 @@ public class TutorialManager : MonoBehaviour
         GameObject key = Instantiate(keyPrefab, playerControllerScript.hand);
     }
 
-    void StartNextLevel()
-    {
-
-    }
 }

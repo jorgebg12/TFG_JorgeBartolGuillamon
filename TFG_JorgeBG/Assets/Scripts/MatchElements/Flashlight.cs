@@ -11,6 +11,8 @@ public class Flashlight : MonoBehaviour
     Light lightCone;
     CapsuleCollider capsuleCollider;
 
+    public GameObject lightConeMesh;
+
     Vector3 startPoint;
     Vector3 endPoint;
     float radius;
@@ -18,6 +20,7 @@ public class Flashlight : MonoBehaviour
 
     private void OnEnable()
     {
+
         playerControlls.playerInputActions.characterControls.UseObject.performed += OnStartUse;
         playerControlls.playerInputActions.characterControls.UseObject.performed += OnUsingObject;
         playerControlls.playerInputActions.characterControls.UseObject.canceled += OnCancelUse;
@@ -39,7 +42,7 @@ public class Flashlight : MonoBehaviour
     {
         lightCone.enabled = true;
         capsuleCollider.enabled = true;
-
+        //lightConeMesh.SetActive(true);
         //CastLightRaycast();
     }
     private void OnUsingObject(InputAction.CallbackContext obj)
@@ -49,6 +52,8 @@ public class Flashlight : MonoBehaviour
     {
         lightCone.enabled = false;
         capsuleCollider.enabled = false;
+        //lightConeMesh.SetActive(false);
+
     }
 
     private void OnTriggerEnter(Collider other)

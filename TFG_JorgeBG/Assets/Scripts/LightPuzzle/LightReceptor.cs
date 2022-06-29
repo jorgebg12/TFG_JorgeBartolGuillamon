@@ -7,6 +7,8 @@ public class LightReceptor : MonoBehaviour
     MeshRenderer meshRenderer;
     Material completeMaterial;
     Material defaulMaterial;
+
+    [HideInInspector] public bool isCompleted = false;
     
     private void Start()
     {
@@ -22,6 +24,8 @@ public class LightReceptor : MonoBehaviour
         //Que no se pueda mover las cosas
 
         //Desbloquear salida y cargar siguiente nivel
-        EventManager.OnCompleteLevel();
+        //EventManager.OnCompleteLevel();
+        isCompleted = true;
+        EventManager.OnReceptorHit();
     }
 }

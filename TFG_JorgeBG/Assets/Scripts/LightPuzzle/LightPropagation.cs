@@ -12,8 +12,8 @@ public class LightPropagation : MonoBehaviour
     public LineRenderer lineRenderer;
     Vector3[] lightPoints;
 
-    public int rayDetectorLayer;
-    public int receptorLayer;
+    int rayDetectorLayer;
+    int receptorLayer;
 
     void Awake()
     {

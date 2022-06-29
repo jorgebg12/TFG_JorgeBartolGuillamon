@@ -50,7 +50,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 8ff554077fde5494fbb4fbfa1e2b3d98, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -246,6 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 823c5842b05006f428f52504f7e4911e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCompleted: 0
 --- !u!1 &1651069743163158846
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,6 +544,7 @@ GameObject:
   - component: {fileID: 1651069743578253880}
   - component: {fileID: 1651069743578253887}
   - component: {fileID: 7188315512242633783}
+  - component: {fileID: 7114342628493881375}
   m_Layer: 0
   m_Name: LightPuzzle
   m_TagString: Untagged
@@ -615,6 +617,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1c9e52f17df53d4bbe549445229ad70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7114342628493881375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651069743578253886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cebd86340d410b44ad05459082fc006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emisors: []
+  receptors: []
 --- !u!1 &1651069743596170421
 GameObject:
   m_ObjectHideFlags: 0
@@ -2664,10 +2680,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightEmisor: {fileID: 3862652119126472025}
   lineRenderer: {fileID: 323259901}
-  rayDetectorLayer: 0
-  layerRayDetection:
-    serializedVersion: 2
-    m_Bits: 256
+  layerRayDetection: rayDetection
 --- !u!1 &8209993297698673204
 GameObject:
   m_ObjectHideFlags: 0

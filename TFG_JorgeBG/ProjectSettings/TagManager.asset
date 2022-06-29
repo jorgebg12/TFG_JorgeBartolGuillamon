@@ -17,8 +17,8 @@ TagManager:
   - push
   - rayDetection
   - receptorDetection
-  - 
-  - 
+  - rayDetectionSecond
+  - receptorDetectionSecond
   - 
   - 
   - 

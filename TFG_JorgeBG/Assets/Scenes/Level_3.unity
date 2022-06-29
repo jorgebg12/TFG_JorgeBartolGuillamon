@@ -730,6 +730,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 194361439757173362, guid: dff1cb003565a404391227242686766a, type: 3}
+      propertyPath: layerRayDetection
+      value: rayDetectionSecond
+      objectReference: {fileID: 0}
     - target: {fileID: 1651069743578253880, guid: dff1cb003565a404391227242686766a, type: 3}
       propertyPath: m_RootOrder
       value: 19
@@ -785,6 +789,10 @@ PrefabInstance:
     - target: {fileID: 1651069743578253886, guid: dff1cb003565a404391227242686766a, type: 3}
       propertyPath: m_Name
       value: LightPuzzle_V2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871929837545403383, guid: dff1cb003565a404391227242686766a, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dff1cb003565a404391227242686766a, type: 3}

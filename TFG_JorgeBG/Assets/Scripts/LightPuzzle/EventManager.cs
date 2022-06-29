@@ -7,6 +7,7 @@ public class EventManager : MonoBehaviour
 {
     public static event Action RecalculateLine;
     public static event Action ClearLine;
+    public static event Action ReceptorHit;
     public static event Action PressButton;
     public static event Action CompleteLevel;
 
@@ -23,6 +24,14 @@ public class EventManager : MonoBehaviour
         if (ClearLine != null)
         {
             ClearLine();
+        }
+    }
+    
+    public static void OnReceptorHit()
+    {
+        if (ReceptorHit != null)
+        {
+            ReceptorHit();
         }
     }
 

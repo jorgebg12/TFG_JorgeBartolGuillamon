@@ -6,7 +6,10 @@ public class LightPropagation : MonoBehaviour
 {
     public Transform opositeLightEmisor;
 
-    LineRenderer lineRenderer;
+    public string layerRayDetectionName;
+    public string layerReceptorName;
+
+    public LineRenderer lineRenderer;
     Vector3[] lightPoints;
 
     public int rayDetectorLayer;
@@ -14,10 +17,12 @@ public class LightPropagation : MonoBehaviour
 
     void Awake()
     {
-        lineRenderer = FindObjectOfType<LineRenderer>();
+        //lineRenderer = FindObjectOfType<LineRenderer>();
 
-        rayDetectorLayer = LayerMask.NameToLayer("rayDetection");
-        receptorLayer = LayerMask.NameToLayer("receptorDetection");
+        //rayDetection
+        rayDetectorLayer = LayerMask.NameToLayer(layerRayDetectionName);
+        //receptorDetection
+        receptorLayer = LayerMask.NameToLayer(layerReceptorName);
     }
     public void PropagateRay()
     {

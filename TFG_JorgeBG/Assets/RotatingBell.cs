@@ -42,7 +42,7 @@ public class RotatingBell : MonoBehaviour
 
         for (int i = 0; i < arrayHits.Length; i++)
         {
-            if (arrayHits[i].gameObject.layer == LayerMask.NameToLayer("push"))
+            if (arrayHits[i].gameObject.layer == LayerMask.NameToLayer("push") || arrayHits[i].gameObject.layer== LayerMask.NameToLayer("staticReflector"))
             {
                 StartCoroutine(RotateObject(arrayHits[i].transform));
                 break;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainSceneManager : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class MainSceneManager : MonoBehaviour
     }
     public void ReadPlayerData()
     {
+        Debug.Log("Reading data");
         int level_1 = PlayerPrefs.GetInt("Level_1");
         int level_2 = PlayerPrefs.GetInt("Level_2");
         int level_3 = PlayerPrefs.GetInt("Level_3");
@@ -65,7 +67,6 @@ public class MainSceneManager : MonoBehaviour
     {
         Application.Quit();
     }
-
     public void ReturnToMain()
     {
         if (!isMovingObjects)
@@ -76,6 +77,24 @@ public class MainSceneManager : MonoBehaviour
             StartCoroutine(MoveObjectOutsideCanvasRight(scrollLevels));
         }
     }
+
+    public void LoadTutorial()
+    {
+        SceneManager.LoadScene(1);
+    }
+    public void LoadLevel1()
+    {
+        SceneManager.LoadScene(2);
+    }
+    public void LoadLevel2()
+    {
+        SceneManager.LoadScene(3);
+    }
+    public void LoadLevel3()
+    {
+        SceneManager.LoadScene(4);
+    }
+
 
     IEnumerator MoveObjectOutsideCanvasLeft(RectTransform rectTransform)
     {

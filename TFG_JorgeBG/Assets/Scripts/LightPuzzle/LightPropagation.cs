@@ -43,8 +43,9 @@ public class LightPropagation : MonoBehaviour
             {
                 DrawLightRay(lightPoints = new Vector3[] { opositeLightEmisor.transform.position, raycasthit.point });
                 raycasthit.collider.transform.gameObject.GetComponent<LightReceptor>().CompletedPuzzle();
-            }else
-                DrawLightRay(lightPoints = new Vector3[] { opositeLightEmisor.transform.position, raycasthit.point });
+            }
+            //else
+            //    DrawLightRay(lightPoints = new Vector3[] { opositeLightEmisor.transform.position, raycasthit.point });
         }
     }
     void DrawLightRay(Vector3[] points)

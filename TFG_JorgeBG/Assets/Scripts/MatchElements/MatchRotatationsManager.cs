@@ -56,13 +56,10 @@ public class MatchRotatationsManager : MonoBehaviour
                 return;
             }
         }
-        StartCoroutine(LoadNewLevel());
+        Debug.Log("Completed");
+        EventManager.OnCompleteLevel();
 
 
     }
 
-    IEnumerator LoadNewLevel()
-    {
-        yield return null;
-    }
 }

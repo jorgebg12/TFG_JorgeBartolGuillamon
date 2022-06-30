@@ -31,8 +31,18 @@ public class UIManager : MonoBehaviour
     public void LevelCompleted()
     {
         int buildIndex = SceneManager.GetActiveScene().buildIndex;
-        SaveLevelCompleted(buildIndex);
-        StartCoroutine(LoadNewLevel(buildIndex + 1));
+        Debug.Log(buildIndex + " " + SceneManager.sceneCountInBuildSettings);
+        if (buildIndex >= SceneManager.sceneCountInBuildSettings)
+        {
+            Debug.Log("TO main");
+            StartCoroutine(LoadNewLevel(0));
+        }
+        else
+        {
+            Debug.Log("To next");
+            SaveLevelCompleted(buildIndex);
+            StartCoroutine(LoadNewLevel(buildIndex + 1));
+        }
     }
 
 
@@ -77,12 +87,12 @@ public class UIManager : MonoBehaviour
     public void Restart()
     {
         Debug.Log("Restart");
-        LoadNewLevel(SceneManager.GetActiveScene().buildIndex);
+        StartCoroutine(LoadNewLevel(SceneManager.GetActiveScene().buildIndex));
     }
     public void MainMenu()
     {
 
-        LoadNewLevel(0);
+        StartCoroutine(LoadNewLevel(0));
     }
 
 }

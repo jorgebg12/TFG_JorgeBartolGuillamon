@@ -28,7 +28,6 @@ public class MainSceneManager : MonoBehaviour
     }
     public void ReadPlayerData()
     {
-        Debug.Log("Reading data");
         int level_1 = PlayerPrefs.GetInt("Level_1");
         int level_2 = PlayerPrefs.GetInt("Level_2");
         int level_3 = PlayerPrefs.GetInt("Level_3");

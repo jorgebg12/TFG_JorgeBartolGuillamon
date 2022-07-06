@@ -123,6 +123,291 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &339257827
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 143057730247731953, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 194361439757173362, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: layerRayDetection
+      value: rayDetectionSecond
+      objectReference: {fileID: 0}
+    - target: {fileID: 699165623952303623, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 761370090922367538, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248424031468030531, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1632260927677543438, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: layerReceptorName
+      value: receptorDetection
+      objectReference: {fileID: 0}
+    - target: {fileID: 1632260927677543438, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: layerRayDetectionName
+      value: rayDetection
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651069743578253880, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651069743578253880, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651069743578253880, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651069743578253880, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651069743578253880, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651069743578253880, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651069743578253880, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651069743578253880, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651069743578253880, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651069743578253880, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651069743578253880, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651069743578253880, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651069743578253880, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651069743578253886, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Name
+      value: LightPuzzle_V2_Models
+      objectReference: {fileID: 0}
+    - target: {fileID: 1747170996853733360, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Center.x
+      value: -0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2090502913968240501, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: layerReceptorName
+      value: receptorDetection
+      objectReference: {fileID: 0}
+    - target: {fileID: 2090502913968240501, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: layerRayDetectionName
+      value: rayDetection
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461109993987947368, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2545227090566047416, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2641300901984033013, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: layerReceptorName
+      value: receptorDetection
+      objectReference: {fileID: 0}
+    - target: {fileID: 2641300901984033013, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: layerRayDetectionName
+      value: rayDetection
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775198428110659697, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2975558493359197099, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3310053828665069746, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387772159545547662, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: layerReceptorName
+      value: receptorDetection
+      objectReference: {fileID: 0}
+    - target: {fileID: 3387772159545547662, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: layerRayDetectionName
+      value: rayDetection
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639168231627145831, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3675342155348679214, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3709290920176950808, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3862652119126472025, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.208
+      objectReference: {fileID: 0}
+    - target: {fileID: 4041660017474563803, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066082065946340077, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4173777022029869732, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301732493595380476, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4757429445822812546, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4872053923786596457, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Center.x
+      value: -0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4935756951881420751, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Center.x
+      value: -0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5194048187246634284, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302262061245316453, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5327220729511917907, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5871929837545403383, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956782182482325808, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6043643611593010400, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6167630913128021189, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: layerReceptorName
+      value: receptorDetection
+      objectReference: {fileID: 0}
+    - target: {fileID: 6167630913128021189, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: layerRayDetectionName
+      value: rayDetection
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468978837873934835, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6635886046571595578, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844067960419798022, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: layerReceptorName
+      value: receptorDetection
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844067960419798022, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: layerRayDetectionName
+      value: rayDetection
+      objectReference: {fileID: 0}
+    - target: {fileID: 7052188825541017627, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7448461144415003526, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: layerReceptorName
+      value: receptorDetection
+      objectReference: {fileID: 0}
+    - target: {fileID: 7448461144415003526, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: layerRayDetectionName
+      value: rayDetection
+      objectReference: {fileID: 0}
+    - target: {fileID: 7796557638504092485, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: layerReceptorName
+      value: receptorDetection
+      objectReference: {fileID: 0}
+    - target: {fileID: 7796557638504092485, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: layerRayDetectionName
+      value: rayDetection
+      objectReference: {fileID: 0}
+    - target: {fileID: 7932627523312708545, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8071846256816029049, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8297869227097473356, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8300882879687786007, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Center.x
+      value: -0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8668061722756034959, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8797160415706319319, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904837780142281118, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8930403316013389224, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
 --- !u!1 &419559636
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,7 +1021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1651069743578253880, guid: dff1cb003565a404391227242686766a, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1651069743578253880, guid: dff1cb003565a404391227242686766a, type: 3}
       propertyPath: m_LocalScale.x
@@ -789,6 +1074,10 @@ PrefabInstance:
     - target: {fileID: 1651069743578253886, guid: dff1cb003565a404391227242686766a, type: 3}
       propertyPath: m_Name
       value: LightPuzzle_V2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651069743578253886, guid: dff1cb003565a404391227242686766a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5871929837545403383, guid: dff1cb003565a404391227242686766a, type: 3}
       propertyPath: m_Layer

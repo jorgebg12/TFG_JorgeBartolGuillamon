@@ -70,7 +70,7 @@ public class PushObject : MonoBehaviour
             {
                 playerControllerScript.playerInputActions.characterControls.Disable();
                 movingObject = true;
-                StartCoroutine(MoveCube());
+                StartCoroutine(MoveCube(targetPosition));
             }
         }
     }
@@ -80,19 +80,27 @@ public class PushObject : MonoBehaviour
         Vector2 input = playerControllerScript.movementInput;
         while (input.x ==0 || input.y == 0)
         {
-            
+            //Debug.Log("Waiting input");
             input = playerControllerScript.movementInput;
             yield return null;
         }
+        //Debug.Log("Selected input: " + input);
         EventManager.OnClearLine();
-        GetPushDirection(input);
-        targetPosition = customGrid.GetCellToMove(direction, pushableObject);
 
+        targetPosition = customGrid.GetCellToMove(input, pushableObject);
+        playerControllerScript.playerInputActions.characterControls.Disable();
+
+        yield return new WaitForSeconds(0.1f);
+        //Debug.Log(targetPosition);
         if (targetPosition != new Vector3(-100,-100,-100) && movingObject == false)
         {
            playerControllerScript.playerInputActions.characterControls.Disable();
            movingObject = true;
-           StartCoroutine(MoveCube());
+           StartCoroutine(MoveCube(targetPosition));
+        }
+        else
+        {
+            playerControllerScript.playerInputActions.characterControls.Enable();
         }
         
     }
@@ -126,13 +134,12 @@ public class PushObject : MonoBehaviour
                 return direction = new Vector3(0, 0, -1);
         }
     }
-    IEnumerator MoveCube() 
+    IEnumerator MoveCube(Vector3 target) 
     {
-        playerControllerScript.playerInputActions.characterControls.Disable();
         playerControllerScript.gameObject.transform.SetParent(pushableObject.transform);
         playerControllerScript.characterController.enabled = false;
 
-        targetPosition = new Vector3(targetPosition.x, pushableObject.transform.position.y, targetPosition.z);
+        targetPosition = new Vector3(target.x, pushableObject.transform.position.y, target.z);
         float step = Time.deltaTime * 2;
         while (pushableObject.position != targetPosition)
         {
@@ -154,7 +161,7 @@ public class PushObject : MonoBehaviour
     private void GetFacingObject2()
     {
         float bodyHeigth = controller.transform.position.y + (controller.height /3);
-        float raycastLenght = controller.radius/1.5f;
+        float raycastLenght = controller.radius/1f;
 
         Vector3 startPoint = new Vector3(controller.transform.position.x, bodyHeigth, controller.transform.position.z) + (controller.transform.forward * controller.radius/2);
 
@@ -172,7 +179,7 @@ public class PushObject : MonoBehaviour
                 pushableObject = arrayHits[i].transform;
                 colliderObject = pushableObject.GetComponent<BoxCollider>();
 
-                //Debug.Log(pushableObject.name);
+                Debug.Log(pushableObject.name);
                 break;
             }
         }

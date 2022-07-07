@@ -17,6 +17,14 @@ public class LightReceptor : MonoBehaviour
         defaulMaterial = Resources.Load<Material>("Materials/defaultLightReceptor");
         completeMaterial = Resources.Load<Material>("Materials/raycastCollision");
     }
+    private void OnEnable()
+    {
+        EventManager.ClearLine += ResetMaterial;
+    }
+    private void OnDisable()
+    {
+        EventManager.ClearLine -= ResetMaterial;
+    }
     public void CompletedPuzzle()
     {
         //Cambiar el color para ver que se ha completado
@@ -27,5 +35,11 @@ public class LightReceptor : MonoBehaviour
         //EventManager.OnCompleteLevel();
         isCompleted = true;
         EventManager.OnReceptorHit();
+    }
+
+    public void ResetMaterial()
+    {
+        isCompleted = false;
+        meshRenderer.material = defaulMaterial;
     }
 }

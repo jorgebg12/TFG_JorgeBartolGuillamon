@@ -338,6 +338,10 @@ PrefabInstance:
       propertyPath: layerRayDetectionName
       value: rayDetection
       objectReference: {fileID: 0}
+    - target: {fileID: 6265447678134627892, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_ReceiveGI
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6468978837873934835, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -389,6 +393,10 @@ PrefabInstance:
     - target: {fileID: 8300882879687786007, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
       propertyPath: m_Center.x
       value: -0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8628894804828405505, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8668061722756034959, guid: 5906681c5fdba1a4a9c395439d299b74, type: 3}
       propertyPath: m_Layer

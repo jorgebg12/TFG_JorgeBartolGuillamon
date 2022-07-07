@@ -50,8 +50,10 @@ public class MatchRotatationsManager : MonoBehaviour
     {
         foreach (MatchElement element in puzzlePieces)
         {
-            Debug.Log(element.name + " " + element.CheckRotation());
-            if (!element.CheckRotation())
+            bool isCorrect = element.CheckRotation();
+            Debug.Log(element.name + " " + isCorrect);
+
+            if (!isCorrect)
             {
                 return;
             }

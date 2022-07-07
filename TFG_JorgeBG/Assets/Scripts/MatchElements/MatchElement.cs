@@ -92,9 +92,9 @@ public class MatchElement : MonoBehaviour
         //Quaternion desired = QuaternionAbs(Quaternion.Euler(desiredRotation));
         currentRotation = rotatingObject.transform.localEulerAngles;
 
-        //Debug.Log(this.name + " " + "current" + rotatingObject.transform.localEulerAngles + "  desired" + desiredRotation);
-
-        return currentRotation==desiredRotation;
+        //Debug.Log(this.name + " " + "current" + currentRotation + "  desired" + desiredRotation + " : " +(currentRotation.Equals(desiredRotation)));
+        
+        return currentRotation.z == desiredRotation.z;
     }
 
     #region Rotate functions

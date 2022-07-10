@@ -23,7 +23,7 @@ public class MainSceneManager : MonoBehaviour
     void Start()
     {
         rectTransformCanvas=FindObjectOfType<Canvas>().GetComponent<RectTransform>();
-
+        //PlayerPrefs.DeleteAll();
         ReadPlayerData();
     }
     public void ReadPlayerData()
@@ -34,19 +34,41 @@ public class MainSceneManager : MonoBehaviour
 
         //
         if (level_1 == 1)
+        {
             buttonLevel_1.enabled = true;
+            ChangeColor(buttonLevel_1.gameObject, Color.white);
+        }
         else
+        {
             buttonLevel_1.enabled = false;
+            ChangeColor(buttonLevel_1.gameObject, Color.gray);
+        }
         //
         if (level_2 == 1)
+        {
             buttonLevel_2.enabled = true;
+            ChangeColor(buttonLevel_2.gameObject, Color.white);
+        }
         else
+        {
             buttonLevel_2.enabled = false;
+            ChangeColor(buttonLevel_2.gameObject, Color.gray);
+        }
         //
         if (level_3 == 1)
+        {
             buttonLevel_3.enabled = true;
+            ChangeColor(buttonLevel_3.gameObject, Color.white);
+        }
         else
+        {
             buttonLevel_3.enabled = false;
+            ChangeColor(buttonLevel_3.gameObject, Color.gray);
+        }
+    }
+    public void ChangeColor(GameObject button, Color color)
+    {
+        button.GetComponent<Image>().color = color;
     }
     public void LoadLevelSelector()
     {

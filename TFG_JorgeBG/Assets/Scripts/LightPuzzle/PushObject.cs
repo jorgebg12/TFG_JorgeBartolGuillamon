@@ -136,8 +136,15 @@ public class PushObject : MonoBehaviour
     }
     IEnumerator MoveCube(Vector3 target) 
     {
+
+        //playerControllerScript.gameObject.transform.Rotate(Vector3.up, Quaternion.Angle(playerControllerScript.gameObject.transform.rotation, pushableObject.rotation));
+        playerControllerScript.gameObject.transform.LookAt(pushableObject,Vector3.up);
+
+        //Disable Player actions
         playerControllerScript.gameObject.transform.SetParent(pushableObject.transform);
         playerControllerScript.characterController.enabled = false;
+        playerControllerScript.animator.SetBool("startPush", true);
+        //
 
         targetPosition = new Vector3(target.x, pushableObject.transform.position.y, target.z);
         float step = Time.deltaTime * 2;
@@ -151,10 +158,12 @@ public class PushObject : MonoBehaviour
         movingObject = false;
         pushableObject = null;
 
+        //Enable Player actions
         playerControllerScript.characterController.enabled = true;
         playerControllerScript.gameObject.transform.SetParent(null);
         playerControllerScript.playerInputActions.characterControls.Enable();
-
+        playerControllerScript.animator.SetBool("startPush", false);
+        //
 
 
     }

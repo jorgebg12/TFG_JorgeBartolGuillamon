@@ -32,7 +32,7 @@ public class UIManager : MonoBehaviour
     {
         int buildIndex = SceneManager.GetActiveScene().buildIndex;
         Debug.Log(buildIndex + " " + SceneManager.sceneCountInBuildSettings);
-        if (buildIndex >= SceneManager.sceneCountInBuildSettings)
+        if (buildIndex >= (SceneManager.sceneCountInBuildSettings-1))
         {
             Debug.Log("TO main");
             StartCoroutine(LoadNewLevel(0));

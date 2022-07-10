@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 [DefaultExecutionOrder(-10)]
 public class playerController : MonoBehaviour
 {
-    Animator animator;
+    [HideInInspector]public Animator animator;
     [HideInInspector]public PlayerInputActions playerInputActions;
     [HideInInspector]public CharacterController characterController;
     public Transform m_camera;

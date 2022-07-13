@@ -12,8 +12,11 @@ public class UIManager : MonoBehaviour
     public Animator transition;
 
     public GameObject pauseMenu;
+    CanvasGroup transitionCanvasGroup;
+    public Text hintText;
 
     playerController playerControllerScript;
+    float timeToDisable;
 
     private void OnEnable()
     {
@@ -26,6 +29,21 @@ public class UIManager : MonoBehaviour
     {
         EventManager.CompleteLevel -= LevelCompleted;
         playerControllerScript.playerInputActions.characterControls.PauseMenu.started -= OpenPause;
+    }
+    private void Awake()
+    {
+        transitionCanvasGroup = FindObjectOfType<CanvasGroup>();
+    }
+
+    private void Update()
+    {
+        hintText.color = new Color(hintText.color.r, hintText.color.g, hintText.color.b, 1 - transitionCanvasGroup.alpha);
+
+        timeToDisable += Time.deltaTime;
+        if(timeToDisable > 10)
+        {
+            hintText.enabled = false;
+        }
     }
 
     public void LevelCompleted()

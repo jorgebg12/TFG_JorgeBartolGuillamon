@@ -138,12 +138,14 @@ public class PushObject : MonoBehaviour
     {
 
         //playerControllerScript.gameObject.transform.Rotate(Vector3.up, Quaternion.Angle(playerControllerScript.gameObject.transform.rotation, pushableObject.rotation));
-        playerControllerScript.gameObject.transform.LookAt(pushableObject,Vector3.up);
+        Vector3 positionToLook = new Vector3(pushableObject.position.x, playerControllerScript.gameObject.transform.position.y, pushableObject.position.z);
+        playerControllerScript.gameObject.transform.LookAt(positionToLook,Vector3.up);
 
         //Disable Player actions
         playerControllerScript.gameObject.transform.SetParent(pushableObject.transform);
         playerControllerScript.characterController.enabled = false;
         playerControllerScript.animator.SetBool("startPush", true);
+        playerControllerScript.enabled = false;
         //
 
         targetPosition = new Vector3(target.x, pushableObject.transform.position.y, target.z);
@@ -159,10 +161,20 @@ public class PushObject : MonoBehaviour
         pushableObject = null;
 
         //Enable Player actions
-        playerControllerScript.characterController.enabled = true;
+
+        playerControllerScript.movementFinal = Vector3.zero;
+        playerControllerScript.movementInput = Vector2.zero;
         playerControllerScript.gameObject.transform.SetParent(null);
-        playerControllerScript.playerInputActions.characterControls.Enable();
         playerControllerScript.animator.SetBool("startPush", false);
+        //playerControllerScript.gameObject.transform.Translate(-playerControllerScript.gameObject.transform.forward,Space.Self);
+        playerControllerScript.characterController.Move(-playerControllerScript.gameObject.transform.forward*0.1f);
+
+        yield return new WaitForSeconds(0.7f);
+
+        playerControllerScript.characterController.enabled = true;
+        playerControllerScript.playerInputActions.characterControls.Enable();
+        playerControllerScript.enabled = true;
+
         //
 
 
